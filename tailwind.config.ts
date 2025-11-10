@@ -57,6 +57,12 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        dental: {
+          blue: "hsl(var(--dental-blue))",
+          teal: "hsl(var(--dental-teal))",
+          green: "hsl(var(--dental-green))",
+          light: "hsl(var(--dental-light))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -80,10 +86,20 @@ export default {
             height: "0",
           },
         },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "slide-up": {
+          from: { transform: "translateY(10px)", opacity: "0" },
+          to: { transform: "translateY(0)", opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.5s ease-out",
+        "slide-up": "slide-up 0.5s ease-out",
       },
     },
   },
