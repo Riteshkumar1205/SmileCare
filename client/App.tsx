@@ -1,6 +1,5 @@
 import "./global.css";
 
-import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
@@ -13,21 +12,21 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/assess" element={<Assess />} />
-        <Route path="/doctors" element={<Doctors />} />
-        <Route path="/ambulance" element={<Ambulance />} />
-        <Route path="/consult" element={<Consult />} />
-        <Route path="/reports" element={<Reports />} />
-        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  </QueryClientProvider>
-);
-
-createRoot(document.getElementById("root")!).render(<App />);
+export default function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/assess" element={<Assess />} />
+          <Route path="/doctors" element={<Doctors />} />
+          <Route path="/ambulance" element={<Ambulance />} />
+          <Route path="/consult" element={<Consult />} />
+          <Route path="/reports" element={<Reports />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
+  );
+}
