@@ -44,16 +44,18 @@ interface PredictionResult {
 }
 
 export default function Assess() {
-  const [step, setStep] = useState<"initial" | "symptoms" | "upload" | "results">(
-    "initial"
-  );
+  const [step, setStep] = useState<
+    "initial" | "symptoms" | "upload" | "results"
+  >("initial");
   const [painLevel, setPainLevel] = useState(0);
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [healthScore, setHealthScore] = useState(0);
   const [usingMicrophone, setUsingMicrophone] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [aiPrediction, setAiPrediction] = useState<PredictionResult | null>(null);
+  const [aiPrediction, setAiPrediction] = useState<PredictionResult | null>(
+    null,
+  );
   const [modelMetrics, setModelMetrics] = useState<{
     trainingAccuracy: number;
     validationAccuracy: number;
@@ -63,7 +65,7 @@ export default function Assess() {
     setSelectedSymptoms((prev) =>
       prev.includes(symptom)
         ? prev.filter((s) => s !== symptom)
-        : [...prev, symptom]
+        : [...prev, symptom],
     );
   };
 
@@ -126,7 +128,7 @@ export default function Assess() {
           setAiPrediction(data.prediction);
           const combinedScore = Math.max(
             calculateHealthScore(),
-            data.prediction.healthScore
+            data.prediction.healthScore,
           );
           setHealthScore(combinedScore);
         } else {
@@ -224,7 +226,9 @@ export default function Assess() {
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
                   Additional Symptoms?
                 </h2>
-                <p className="text-gray-600 mb-6">Select any you're experiencing</p>
+                <p className="text-gray-600 mb-6">
+                  Select any you're experiencing
+                </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                   {symptoms.map((symptom) => (
@@ -310,8 +314,8 @@ export default function Assess() {
                     <p className="text-sm text-blue-800">
                       <strong>AI Analysis:</strong> Your uploaded image will be
                       analyzed using a deep learning model trained on dental
-                      disease datasets. You'll receive predictions with confidence
-                      scores and model accuracy metrics.
+                      disease datasets. You'll receive predictions with
+                      confidence scores and model accuracy metrics.
                     </p>
                   </div>
 
@@ -451,7 +455,9 @@ export default function Assess() {
 
                   <div className="space-y-4">
                     <div className="p-4 bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg border-l-4 border-primary">
-                      <p className="text-sm text-gray-600 mb-1">Detected Condition</p>
+                      <p className="text-sm text-gray-600 mb-1">
+                        Detected Condition
+                      </p>
                       <p className="text-2xl font-bold text-gray-900">
                         {aiPrediction.disease}
                       </p>
@@ -466,7 +472,10 @@ export default function Assess() {
                           {Object.entries(aiPrediction.allPredictions)
                             .sort(([, a], [, b]) => b - a)
                             .map(([condition, confidence]) => (
-                              <div key={condition} className="flex items-center gap-3">
+                              <div
+                                key={condition}
+                                className="flex items-center gap-3"
+                              >
                                 <span className="text-sm text-gray-700 flex-1">
                                   {condition}
                                 </span>
@@ -567,8 +576,8 @@ export default function Assess() {
                           Consult with a Dentist
                         </p>
                         <p className="text-blue-800 mb-4">
-                          Get professional advice from licensed dentists. Available
-                          globally 24/7.
+                          Get professional advice from licensed dentists.
+                          Available globally 24/7.
                         </p>
                         <Link
                           to="/consult"
@@ -591,8 +600,9 @@ export default function Assess() {
                           Preventive Care Tips
                         </p>
                         <p className="text-green-800">
-                          Keep maintaining your dental health! Brush twice daily,
-                          floss regularly, and visit a dentist every 6 months.
+                          Keep maintaining your dental health! Brush twice
+                          daily, floss regularly, and visit a dentist every 6
+                          months.
                         </p>
                       </div>
                     </div>

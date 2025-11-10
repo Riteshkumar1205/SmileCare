@@ -5,6 +5,7 @@ A comprehensive dental healthcare platform with AI-powered disease detection, do
 ## 🌟 Key Features
 
 ### 🦷 AI-Powered Teeth Assessment
+
 - **Real-time Diagnosis**: Upload teeth images for instant AI analysis
 - **Accuracy Metrics**: Display model accuracy (80%+ real-time, 81% training)
 - **Disease Detection**: CNN-based classification of dental diseases
@@ -13,6 +14,7 @@ A comprehensive dental healthcare platform with AI-powered disease detection, do
 - **Home Remedies**: Get personalized home care recommendations
 
 ### 👨‍⚕️ Smart Doctor Finder
+
 - **GPS Integration**: Find nearest dentists with location-based search
 - **Doctor Comparison**: Compare doctors by ratings, price, experience
 - **Success Rates**: View dentist success rates and patient reviews
@@ -20,6 +22,7 @@ A comprehensive dental healthcare platform with AI-powered disease detection, do
 - **Availability**: Real-time availability and appointment booking
 
 ### 🚑 Emergency Ambulance Service
+
 - **Instant Booking**: Quick ambulance dispatch for emergencies
 - **Real-time Tracking**: Live tracking of ambulance location
 - **Driver Ratings**: View ambulance driver ratings and reviews
@@ -27,12 +30,14 @@ A comprehensive dental healthcare platform with AI-powered disease detection, do
 - **Multiple Types**: Basic, Advanced, and ICU ambulance options
 
 ### 💬 Global Consultant Network
+
 - **24/7 Availability**: Connect with dentists worldwide anytime
 - **Multiple Modes**: Text chat, video call, or audio call
 - **Regional Languages**: Consult in your preferred language
 - **Expert Review**: Get second opinions from specialists
 
 ### 📊 Health Reports & Tracking
+
 - **Assessment History**: Track all your dental assessments
 - **Health Trends**: Visualize your dental health progress
 - **Export Reports**: Download reports as PDF
@@ -136,12 +141,14 @@ npm run dev
 ### Automated Setup
 
 **On macOS/Linux:**
+
 ```bash
 chmod +x SETUP.sh
 ./SETUP.sh
 ```
 
 **On Windows:**
+
 ```cmd
 SETUP.bat
 ```
@@ -321,6 +328,7 @@ The platform displays three key accuracy metrics:
 3. **Prediction Confidence**: Confidence for this specific image (0-100%)
 
 These metrics help users understand:
+
 - How reliable the model is overall
 - How confident the model is in each prediction
 - When to seek professional medical advice
@@ -336,12 +344,14 @@ These metrics help users understand:
 ## 🚀 Deployment Options
 
 ### Frontend Deployment
+
 - **Netlify** (recommended)
 - **Vercel**
 - **GitHub Pages**
 - **AWS S3 + CloudFront**
 
 ### Backend Deployment
+
 - **Heroku** (simple)
 - **AWS EC2 / ECS**
 - **Google Cloud Run**
@@ -349,6 +359,7 @@ These metrics help users understand:
 - **DigitalOcean**
 
 ### ML Service Deployment
+
 - **AWS SageMaker**
 - **Google Cloud AI Platform**
 - **Azure ML**
@@ -356,12 +367,12 @@ These metrics help users understand:
 
 ## 📈 Performance Benchmarks
 
-| Operation | Time | Accuracy |
-|-----------|------|----------|
-| Image prediction | 200-500ms | 80% |
-| Model loading | 1-2s | - |
-| Page load | <3s | - |
-| API response | <1s | - |
+| Operation        | Time      | Accuracy |
+| ---------------- | --------- | -------- |
+| Image prediction | 200-500ms | 80%      |
+| Model loading    | 1-2s      | -        |
+| Page load        | <3s       | -        |
+| API response     | <1s       | -        |
 
 ## 🧪 Testing
 
@@ -396,6 +407,7 @@ MIT License - see LICENSE file for details
 ## 🆘 Troubleshooting
 
 ### Port Conflicts
+
 ```bash
 # Change ports if needed
 npm run dev -- --port 5174
@@ -403,12 +415,14 @@ npm run dev -- --port 5174
 ```
 
 ### Model Not Loading
+
 ```bash
 cd ml_service
 python model_trainer.py  # Train model first
 ```
 
 ### Kaggle Authentication
+
 - Verify credentials in `.env` files
 - Check `~/.kaggle/kaggle.json` permissions
 - Ensure Kaggle API token is valid

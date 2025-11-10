@@ -244,15 +244,15 @@ export default function Index() {
               <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 flex flex-col items-center justify-center text-center">
                 <Globe className="w-12 h-12 text-primary mb-4" />
                 <p className="font-semibold text-gray-900">Global Network</p>
-                <p className="text-sm text-gray-600 mt-1">
-                  Doctors worldwide
-                </p>
+                <p className="text-sm text-gray-600 mt-1">Doctors worldwide</p>
               </div>
 
               <div className="bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl p-8 flex flex-col items-center justify-center text-center">
                 <Heart className="w-12 h-12 text-accent mb-4" />
                 <p className="font-semibold text-gray-900">Health First</p>
-                <p className="text-sm text-gray-600 mt-1">Your wellness focus</p>
+                <p className="text-sm text-gray-600 mt-1">
+                  Your wellness focus
+                </p>
               </div>
 
               <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 flex flex-col items-center justify-center text-center">

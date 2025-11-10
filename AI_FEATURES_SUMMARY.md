@@ -11,16 +11,19 @@ This dental health platform includes a complete AI/ML pipeline for real-time tee
 The application displays three key accuracy measurements to ensure transparency:
 
 ### 1. **Real-Time Accuracy: 80%**
+
 - Current model's validation accuracy on test images
 - Shows how reliable predictions are overall
 - Updates based on model retraining
 
 ### 2. **Training Accuracy: 81%**
+
 - Model's performance during training phase
 - Slightly higher than real-time due to perfect conditions
 - Validates that model was trained successfully
 
 ### 3. **Prediction Confidence: Variable (0-100%)**
+
 - Confidence for each specific prediction
 - Unique to each image analyzed
 - Shows model's certainty for that particular case
@@ -64,6 +67,7 @@ The AI model is trained to recognize and classify:
 - Other dental conditions
 
 Each prediction includes:
+
 - Disease name
 - Confidence percentage
 - All alternative predictions
@@ -158,15 +162,15 @@ Total Parameters: ~12.8M
 
 ### Training Configuration
 
-| Parameter | Value |
-|-----------|-------|
-| Optimizer | Adam (lr=0.001) |
-| Loss Function | Sparse Categorical Crossentropy |
-| Batch Size | 32 images |
-| Epochs | 50 (with early stopping) |
-| Validation Split | 20% |
-| Data Augmentation | Yes (rotation, flip, zoom) |
-| Image Size | 224×224 pixels |
+| Parameter         | Value                           |
+| ----------------- | ------------------------------- |
+| Optimizer         | Adam (lr=0.001)                 |
+| Loss Function     | Sparse Categorical Crossentropy |
+| Batch Size        | 32 images                       |
+| Epochs            | 50 (with early stopping)        |
+| Validation Split  | 20%                             |
+| Data Augmentation | Yes (rotation, flip, zoom)      |
+| Image Size        | 224×224 pixels                  |
 
 ## 🎓 Dataset Information
 
@@ -181,6 +185,7 @@ Total Parameters: ~12.8M
 ## 🔬 Machine Learning Pipeline
 
 ### 1. Data Preparation
+
 ```
 Raw Images
     ↓
@@ -194,6 +199,7 @@ Train/Val Split (80/20)
 ```
 
 ### 2. Data Augmentation
+
 ```
 Original Images
     ├─ Rotation (±20°)
@@ -204,6 +210,7 @@ Original Images
 ```
 
 ### 3. Model Training
+
 ```
 Feed Batch
     ↓
@@ -219,6 +226,7 @@ Repeat 50 Epochs
 ```
 
 ### 4. Evaluation
+
 ```
 Validation Set
     ↓
@@ -258,16 +266,19 @@ Result: 80% Accuracy
 ## 📊 Interpreting Results
 
 ### When Confidence is High (>80%)
+
 - Model is very sure about prediction
 - Likely accurate diagnosis
 - Still recommend professional verification
 
 ### When Confidence is Medium (50-80%)
+
 - Model has reasonable confidence
 - Could be correct
 - Professional opinion strongly recommended
 
 ### When Confidence is Low (<50%)
+
 - Model is uncertain
 - Image may be unclear
 - Definitely seek professional dentist
@@ -275,12 +286,14 @@ Result: 80% Accuracy
 ## 🚀 Deployment & Performance
 
 ### Runtime Performance
+
 - Model Load Time: 1-2 seconds
 - Prediction Time: 200-500ms
 - Total Response: <1 second (cached)
 - Browser Load: <3 seconds
 
 ### Hardware Requirements
+
 - **Minimum**: 4GB RAM, 2GB storage
 - **Recommended**: 8GB RAM, GPU, 10GB storage
 - **Optimal**: GPU-enabled server, 16GB RAM
@@ -299,6 +312,7 @@ The system can retrain the model with:
 ### Monitoring Accuracy
 
 Track improvements over time:
+
 - Real-time accuracy trend
 - Training accuracy curve
 - Per-disease accuracy breakdown
@@ -309,6 +323,7 @@ Track improvements over time:
 ### Accuracy Validation
 
 The 80% real-time accuracy is:
+
 - ✅ Measured on independent test set
 - ✅ Not seen during training
 - ✅ Conservative estimate
@@ -325,18 +340,21 @@ The 80% real-time accuracy is:
 ## 🎯 Use Cases
 
 ### For Patients
+
 - Quick initial assessment
 - Understand dental issues
 - Track health improvements
 - Access professional help
 
 ### For Healthcare Providers
+
 - Preliminary screening
 - Patient education
 - Triage support
 - Outcome tracking
 
 ### For Research
+
 - Dataset access
 - Model architecture insights
 - Accuracy benchmarks
@@ -345,12 +363,14 @@ The 80% real-time accuracy is:
 ## 🔐 Privacy & Security
 
 ### Data Handling
+
 - No image storage (real-time processing)
 - No personal data collection
 - Secure API communication
 - HTTPS ready for production
 
 ### Model Security
+
 - Model file protected
 - Access control ready
 - Audit logging capability
@@ -359,6 +379,7 @@ The 80% real-time accuracy is:
 ## 📚 Documentation
 
 For implementation details:
+
 - **[ML_SETUP.md](./ML_SETUP.md)** - Model training guide
 - **[ml_service/README.md](./ml_service/README.md)** - Service documentation
 - **[QUICK_START.md](./QUICK_START.md)** - Getting started

@@ -102,7 +102,9 @@ export default function Doctors() {
   const [doctors, setDoctors] = useState<Doctor[]>(mockDoctors);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSpecialty, setSelectedSpecialty] = useState("All");
-  const [sortBy, setSortBy] = useState<"distance" | "rating" | "fee">("distance");
+  const [sortBy, setSortBy] = useState<"distance" | "rating" | "fee">(
+    "distance",
+  );
   const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
 
   const specialties = [
@@ -120,7 +122,8 @@ export default function Doctors() {
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
       const matchesSpecialty =
-        selectedSpecialty === "All" || doc.specialty.includes(selectedSpecialty);
+        selectedSpecialty === "All" ||
+        doc.specialty.includes(selectedSpecialty);
       return matchesSearch && matchesSpecialty;
     })
     .sort((a, b) => {
@@ -222,7 +225,9 @@ export default function Doctors() {
             <div className="lg:col-span-2">
               {filteredAndSortedDoctors.length === 0 ? (
                 <div className="bg-white rounded-2xl border-2 border-gray-100 p-12 text-center">
-                  <p className="text-gray-600">No doctors found matching your criteria</p>
+                  <p className="text-gray-600">
+                    No doctors found matching your criteria
+                  </p>
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -265,7 +270,8 @@ export default function Doctors() {
                             <div className="flex items-center gap-2 text-gray-700">
                               <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                               <span>
-                                <strong>{doctor.rating}</strong> ({doctor.reviews})
+                                <strong>{doctor.rating}</strong> (
+                                {doctor.reviews})
                               </span>
                             </div>
                             <div className="flex items-center gap-2 text-gray-700">
@@ -315,14 +321,18 @@ export default function Doctors() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Doctor Profile */}
                 <div className="md:col-span-1 text-center">
-                  <div className="text-9xl mb-4">{selectedDoctorData.image}</div>
+                  <div className="text-9xl mb-4">
+                    {selectedDoctorData.image}
+                  </div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">
                     {selectedDoctorData.name}
                   </h2>
                   <p className="text-gray-600 mb-4 font-semibold">
                     {selectedDoctorData.specialty}
                   </p>
-                  <p className="text-gray-600 mb-6">{selectedDoctorData.hospital}</p>
+                  <p className="text-gray-600 mb-6">
+                    {selectedDoctorData.hospital}
+                  </p>
 
                   <div className="flex flex-col gap-3">
                     <Link
@@ -366,13 +376,17 @@ export default function Doctors() {
                       <p className="text-3xl font-bold text-purple-700 mb-2">
                         ₹{selectedDoctorData.fee}
                       </p>
-                      <p className="text-sm text-purple-600">Consultation Fee</p>
+                      <p className="text-sm text-purple-600">
+                        Consultation Fee
+                      </p>
                     </div>
                   </div>
 
                   {/* Summary */}
                   <div className="bg-gray-50 rounded-xl p-6">
-                    <h3 className="font-bold text-gray-900 mb-4">Why Choose This Doctor?</h3>
+                    <h3 className="font-bold text-gray-900 mb-4">
+                      Why Choose This Doctor?
+                    </h3>
                     <ul className="space-y-3">
                       <li className="flex items-start gap-3">
                         <Heart className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
@@ -389,7 +403,8 @@ export default function Doctors() {
                       <li className="flex items-start gap-3">
                         <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                         <span className="text-gray-700">
-                          {selectedDoctorData.experience} years of dental expertise
+                          {selectedDoctorData.experience} years of dental
+                          expertise
                         </span>
                       </li>
                       <li className="flex items-start gap-3">

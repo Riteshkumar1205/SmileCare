@@ -36,7 +36,8 @@ const mockReports: Report[] = [
     healthScore: 62,
     status: "Caution",
     symptoms: ["Bleeding gums", "Bad breath"],
-    doctorRecommendation: "Schedule appointment with Dr. Priya Singh for gum treatment",
+    doctorRecommendation:
+      "Schedule appointment with Dr. Priya Singh for gum treatment",
   },
   {
     id: 3,
@@ -58,7 +59,8 @@ export default function Reports() {
             Your Health Reports
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl">
-            Track your dental health journey with detailed reports and recommendations
+            Track your dental health journey with detailed reports and
+            recommendations
           </p>
         </div>
       </section>
@@ -252,7 +254,9 @@ export default function Reports() {
                 </p>
               </button>
               <button className="p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left">
-                <p className="font-semibold text-gray-900 mb-1">Share with Doctor</p>
+                <p className="font-semibold text-gray-900 mb-1">
+                  Share with Doctor
+                </p>
                 <p className="text-sm text-gray-600">
                   Send to your healthcare provider
                 </p>

@@ -120,10 +120,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/doctors"
-                    className="hover:text-primary transition"
-                  >
+                  <Link to="/doctors" className="hover:text-primary transition">
                     Doctor Finder
                   </Link>
                 </li>

@@ -97,6 +97,7 @@ python model_trainer.py
 ```
 
 Output files:
+
 - `models/teeth_disease_model.h5` - Trained model
 - `models/metrics.json` - Training metrics
 
@@ -194,11 +195,13 @@ Returns current model metrics and training state.
 ### Hardware Requirements
 
 **Minimum**:
+
 - CPU: 4 cores
 - RAM: 4GB
 - Storage: 2GB
 
 **Recommended**:
+
 - CPU: 8+ cores
 - RAM: 8GB+
 - GPU: NVIDIA with CUDA support

@@ -91,6 +91,7 @@ python dataset_handler.py
 ```
 
 This will:
+
 - Authenticate with Kaggle API
 - Download the oral diseases dataset
 - Extract and organize the data
@@ -118,6 +119,7 @@ python model_trainer.py
 ```
 
 This will:
+
 - Load images from the dataset
 - Build a CNN model
 - Train for 50 epochs with data augmentation
@@ -278,6 +280,7 @@ Solution: Run `python model_trainer.py` to train the model first.
 Error: `Kaggle authentication failed`
 
 Solution:
+
 1. Verify Kaggle credentials in `.env`
 2. Ensure `~/.kaggle/kaggle.json` exists with valid credentials
 3. Check Kaggle API token hasn't expired
@@ -287,6 +290,7 @@ Solution:
 Error: `Failed to connect to ML service`
 
 Solution:
+
 1. Ensure Flask service is running on port 5000
 2. Check `ML_SERVICE_URL` in `.env`
 3. Verify no port conflicts
@@ -294,6 +298,7 @@ Solution:
 ### Out of Memory Error
 
 If training causes OOM:
+
 1. Reduce batch size in `model_trainer.py`
 2. Load fewer images per class (adjust limit in `load_images_from_directory`)
 3. Use a smaller image size (default 224x224)
@@ -335,6 +340,7 @@ For production:
 ## Support
 
 For issues or questions, please check:
+
 1. Error logs in terminal
 2. Browser console for frontend errors
 3. Flask terminal for backend errors

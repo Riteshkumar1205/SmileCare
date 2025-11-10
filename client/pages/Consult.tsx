@@ -53,9 +53,13 @@ const consultants: Consultant[] = [
 ];
 
 export default function Consult() {
-  const [selectedConsultant, setSelectedConsultant] = useState<number | null>(null);
+  const [selectedConsultant, setSelectedConsultant] = useState<number | null>(
+    null,
+  );
   const [chatMode, setChatMode] = useState<"chat" | "video" | "call">("chat");
-  const [messages, setMessages] = useState<Array<{ id: number; text: string; sender: "user" | "doctor" }>>([]);
+  const [messages, setMessages] = useState<
+    Array<{ id: number; text: string; sender: "user" | "doctor" }>
+  >([]);
   const [inputMessage, setInputMessage] = useState("");
   const [consultationStarted, setConsultationStarted] = useState(false);
 
@@ -185,9 +189,7 @@ export default function Consult() {
                     placeholder="Type your question..."
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
-                    onKeyPress={(e) =>
-                      e.key === "Enter" && handleSendMessage()
-                    }
+                    onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
                     className="flex-1 px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition"
                   />
                   <button
@@ -250,8 +252,8 @@ export default function Consult() {
             Consult with Dentists Worldwide
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl">
-            Connect with licensed dentists globally via text, video, or call. Available
-            24/7 in your language.
+            Connect with licensed dentists globally via text, video, or call.
+            Available 24/7 in your language.
           </p>
         </div>
       </section>
@@ -314,7 +316,9 @@ export default function Consult() {
                 className="bg-white rounded-xl p-6 text-center border-2 border-gray-100"
               >
                 <div className="text-4xl mb-3">{feature.icon}</div>
-                <h3 className="font-bold text-gray-900 mb-2">{feature.title}</h3>
+                <h3 className="font-bold text-gray-900 mb-2">
+                  {feature.title}
+                </h3>
                 <p className="text-sm text-gray-600">{feature.desc}</p>
               </div>
             ))}

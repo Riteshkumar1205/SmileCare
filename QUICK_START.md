@@ -87,6 +87,7 @@ Expected output: `http://localhost:5173`
 ## Features to Explore
 
 ### 🦷 Teeth Assessment
+
 - AI image analysis
 - Real-time accuracy display (80%+)
 - Pain level tracking
@@ -94,24 +95,28 @@ Expected output: `http://localhost:5173`
 - Home remedies
 
 ### 👨‍⚕️ Find Doctors
+
 - GPS-based doctor finder
 - Doctor comparison and ratings
 - Success rates and pricing
 - Multiple consultation options
 
 ### 🚑 Ambulance Service
+
 - Emergency ambulance booking
 - Real-time tracking
 - Driver ratings
 - Transparent pricing
 
 ### 💬 Global Consultation
+
 - Chat with dentists 24/7
 - Video and audio calls
 - Multi-language support
 - Worldwide availability
 
 ### 📊 Health Reports
+
 - Track assessment history
 - Download reports
 - Share with doctors
@@ -146,10 +151,12 @@ project/
 ## API Endpoints
 
 ### Dental Assessment
+
 - `POST /api/predict` - Get AI prediction for uploaded image
 - `GET /api/model/info` - Get model accuracy metrics
 
 ### Model Training
+
 - `POST /api/train` - Train the model
 - `GET /api/training-status` - Check training progress
 - `GET /api/metrics` - Get current metrics
@@ -169,6 +176,7 @@ These metrics show the model's reliability and help you understand prediction qu
 ### Update Kaggle Credentials Later
 
 1. Update `.env` and `ml_service/.env`:
+
    ```
    KAGGLE_USERNAME=your_actual_username
    KAGGLE_KEY=your_actual_api_key
@@ -177,6 +185,7 @@ These metrics show the model's reliability and help you understand prediction qu
 2. Restart both services
 
 3. Download dataset (optional):
+
    ```bash
    cd ml_service
    python dataset_handler.py

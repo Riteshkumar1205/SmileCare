@@ -85,13 +85,15 @@ const ambulances: AmbulanceService[] = [
 ];
 
 export default function Ambulance() {
-  const [selectedAmbulance, setSelectedAmbulance] = useState<number | null>(null);
-  const [bookingStep, setBookingStep] = useState<"select" | "confirm" | "success">(
-    "select"
+  const [selectedAmbulance, setSelectedAmbulance] = useState<number | null>(
+    null,
   );
-  const [emergencyLevel, setEmergencyLevel] = useState<"normal" | "urgent" | "critical">(
-    "urgent"
-  );
+  const [bookingStep, setBookingStep] = useState<
+    "select" | "confirm" | "success"
+  >("select");
+  const [emergencyLevel, setEmergencyLevel] = useState<
+    "normal" | "urgent" | "critical"
+  >("urgent");
 
   const selectedData = ambulances.find((a) => a.id === selectedAmbulance);
 
@@ -150,7 +152,9 @@ export default function Ambulance() {
                     <button
                       key={level.id}
                       onClick={() =>
-                        setEmergencyLevel(level.id as "normal" | "urgent" | "critical")
+                        setEmergencyLevel(
+                          level.id as "normal" | "urgent" | "critical",
+                        )
                       }
                       className={`p-4 rounded-lg border-2 transition text-left font-semibold ${
                         emergencyLevel === level.id
@@ -231,14 +235,15 @@ export default function Ambulance() {
                           <div>
                             <p className="text-gray-600 text-xs">Staff</p>
                             <p className="font-bold text-gray-900">
-                              {ambulance.drivers} driver{ambulance.drivers > 1 ? "s" : ""}
+                              {ambulance.drivers} driver
+                              {ambulance.drivers > 1 ? "s" : ""}
                             </p>
                           </div>
                         </div>
 
                         <p className="text-xs text-gray-600">
-                          {ambulance.reviews} customer reviews • {ambulance.successRate}%
-                          success rate
+                          {ambulance.reviews} customer reviews •{" "}
+                          {ambulance.successRate}% success rate
                         </p>
                       </div>
 
@@ -271,7 +276,9 @@ export default function Ambulance() {
                 <div className="space-y-6">
                   {/* Service Details */}
                   <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-6">
-                    <h3 className="font-bold text-gray-900 mb-4">Service Details</h3>
+                    <h3 className="font-bold text-gray-900 mb-4">
+                      Service Details
+                    </h3>
                     <div className="space-y-3 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-600">Ambulance Service</span>
@@ -302,7 +309,9 @@ export default function Ambulance() {
 
                   {/* Highlights */}
                   <div>
-                    <h3 className="font-bold text-gray-900 mb-4">What You Get</h3>
+                    <h3 className="font-bold text-gray-900 mb-4">
+                      What You Get
+                    </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="flex items-start gap-3">
                         <Clock className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" />
@@ -333,7 +342,8 @@ export default function Ambulance() {
                             Highly Rated
                           </p>
                           <p className="text-xs text-gray-600">
-                            {selectedData.rating}★ ({selectedData.reviews} reviews)
+                            {selectedData.rating}★ ({selectedData.reviews}{" "}
+                            reviews)
                           </p>
                         </div>
                       </div>
@@ -355,8 +365,9 @@ export default function Ambulance() {
                   <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 flex items-start gap-3">
                     <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
                     <p className="text-sm text-blue-800">
-                      An ambulance will be dispatched to your location immediately.
-                      Please ensure your location access is enabled.
+                      An ambulance will be dispatched to your location
+                      immediately. Please ensure your location access is
+                      enabled.
                     </p>
                   </div>
                 </div>
@@ -394,16 +405,20 @@ export default function Ambulance() {
                   Ambulance Booked!
                 </h2>
                 <p className="text-gray-600 mb-6">
-                  Your ambulance is on the way. The driver will arrive in approximately{" "}
-                  <strong>{selectedData.eta} minutes</strong>.
+                  Your ambulance is on the way. The driver will arrive in
+                  approximately <strong>{selectedData.eta} minutes</strong>.
                 </p>
 
                 <div className="bg-green-50 rounded-xl p-6 mb-8 text-left">
-                  <h3 className="font-bold text-gray-900 mb-4">Booking Details</h3>
+                  <h3 className="font-bold text-gray-900 mb-4">
+                    Booking Details
+                  </h3>
                   <div className="space-y-3 text-sm">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Booking ID</span>
-                      <span className="font-semibold font-mono">AMB-2025-1849</span>
+                      <span className="font-semibold font-mono">
+                        AMB-2025-1849
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Service</span>
@@ -411,11 +426,15 @@ export default function Ambulance() {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Amount Paid</span>
-                      <span className="font-semibold">₹{selectedData.price}</span>
+                      <span className="font-semibold">
+                        ₹{selectedData.price}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Driver Rating</span>
-                      <span className="font-semibold">★ {selectedData.rating}</span>
+                      <span className="font-semibold">
+                        ★ {selectedData.rating}
+                      </span>
                     </div>
                   </div>
                 </div>
