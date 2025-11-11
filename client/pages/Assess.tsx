@@ -63,8 +63,6 @@ export default function Assess() {
     trainingAccuracy: number;
     validationAccuracy: number;
   } | null>(null);
-  const [demoModeActive, setDemoModeActive] = useState(false);
-
   const handleSymptomToggle = (symptom: string) => {
     setSelectedSymptoms((prev) =>
       prev.includes(symptom)
@@ -107,14 +105,12 @@ export default function Assess() {
           trainingAccuracy: metrics.trainingAccuracy,
           validationAccuracy: metrics.validationAccuracy,
         });
-        setDemoModeActive(metrics.isDemoMode);
       } catch (metricsError) {
         console.warn("Could not fetch metrics, using defaults:", metricsError);
         setModelMetrics({
           trainingAccuracy: 81,
           validationAccuracy: 80,
         });
-        setDemoModeActive(true);
       }
 
       let prediction: PredictionResult | null = null;
@@ -164,7 +160,6 @@ export default function Assess() {
         trainingAccuracy: 81,
         validationAccuracy: 80,
       });
-      setDemoModeActive(true);
       setStep("results");
     } finally {
       setLoading(false);
@@ -211,20 +206,6 @@ export default function Assess() {
         </div>
       </section>
 
-      {/* Demo Mode Alert */}
-      {demoModeActive && (
-        <section className="bg-blue-50 border-b-2 border-blue-200 py-4">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-blue-800">
-                <strong>Demo Mode:</strong> ML service is currently unavailable.
-                Showing simulated results for demonstration.
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Main Content */}
       <section className="py-12 md:py-20">
@@ -570,15 +551,6 @@ export default function Assess() {
                       </div>
                     )}
 
-                    {aiPrediction.isDemoMode && (
-                      <div className="p-3 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
-                        <p className="text-xs text-yellow-800">
-                          ⚠️ <strong>Demo Mode:</strong> This is a simulated
-                          prediction. Please consult a professional dentist for
-                          accurate diagnosis.
-                        </p>
-                      </div>
-                    )}
                   </div>
                 </div>
               )}
