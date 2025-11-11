@@ -72,27 +72,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                 {languageOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg border-2 border-gray-200 shadow-lg z-40">
-                    <div className="p-2">
-                      <p className="text-xs font-semibold text-gray-600 px-2 py-1">
+                    <div className="p-3 border-b border-gray-200">
+                      <div className="text-xs font-semibold text-gray-600">
                         {t("selectLanguage")}
-                      </p>
-                      <div className="space-y-1">
-                        {Object.entries(LANGUAGES).map(([code, lang]) => (
-                          <button
-                            key={code}
-                            onClick={() => handleLanguageChange(code as Language)}
-                            className={cn(
-                              "w-full text-left px-3 py-2 rounded-lg text-sm transition",
-                              language === code
-                                ? "bg-primary text-white font-semibold"
-                                : "text-gray-700 hover:bg-gray-100"
-                            )}
-                          >
-                            <span className="mr-2">{lang.flag}</span>
-                            {lang.nativeName}
-                          </button>
-                        ))}
                       </div>
+                    </div>
+                    <div className="space-y-1 p-2">
+                      {Object.entries(LANGUAGES).map(([code, lang]) => (
+                        <button
+                          key={code}
+                          onClick={() => handleLanguageChange(code as Language)}
+                          className={cn(
+                            "w-full text-left px-3 py-2 rounded-lg text-sm transition",
+                            language === code
+                              ? "bg-primary text-white font-semibold"
+                              : "text-gray-700 hover:bg-gray-100"
+                          )}
+                        >
+                          <span className="mr-2">{lang.flag}</span>
+                          {lang.nativeName}
+                        </button>
+                      ))}
                     </div>
                   </div>
                 )}
