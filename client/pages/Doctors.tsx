@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   MapPin,
   Star,
@@ -141,11 +142,10 @@ export default function Doctors() {
       <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-12 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Find & Compare Dentists
+            {t("findCompare")}
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl">
-            Find the best dentist near you with ratings, pricing, and real
-            patient reviews
+            {t("findBestDentist")}
           </p>
         </div>
       </section>
@@ -160,13 +160,13 @@ export default function Doctors() {
                 {/* Search */}
                 <div className="mb-6">
                   <label className="block text-sm font-semibold text-gray-900 mb-2">
-                    Search by Name
+                    {t("searchByName")}
                   </label>
                   <div className="relative">
                     <Search className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                     <input
                       type="text"
-                      placeholder="Doctor name..."
+                      placeholder={t("doctorName")}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition"
@@ -178,7 +178,7 @@ export default function Doctors() {
                 <div className="mb-6">
                   <label className="block text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
                     <Filter className="w-4 h-4" />
-                    Specialty
+                    {t("specialty")}
                   </label>
                   <div className="space-y-2">
                     {specialties.map((specialty) => (
@@ -200,23 +200,23 @@ export default function Doctors() {
                 {/* Sort */}
                 <div className="pb-6 border-b border-gray-200 mb-6">
                   <label className="block text-sm font-semibold text-gray-900 mb-3">
-                    Sort by
+                    {t("sortBy")}
                   </label>
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as any)}
                     className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition"
                   >
-                    <option value="distance">Nearest First</option>
-                    <option value="rating">Highest Rated</option>
-                    <option value="fee">Lowest Fee</option>
+                    <option value="distance">{t("nearestFirst")}</option>
+                    <option value="rating">{t("highestRated")}</option>
+                    <option value="fee">{t("lowestFee")}</option>
                   </select>
                 </div>
 
                 {/* Location Sharing */}
                 <button className="w-full px-4 py-2 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/5 transition flex items-center justify-center gap-2">
                   <MapPin className="w-4 h-4" />
-                  Use My Location
+                  {t("useMyLocation")}
                 </button>
               </div>
             </div>
