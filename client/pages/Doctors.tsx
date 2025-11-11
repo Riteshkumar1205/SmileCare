@@ -100,6 +100,7 @@ const mockDoctors: Doctor[] = [
 ];
 
 export default function Doctors() {
+  const { t } = useLanguage();
   const [doctors, setDoctors] = useState<Doctor[]>(mockDoctors);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSpecialty, setSelectedSpecialty] = useState("All");
