@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
 interface UseVoiceReturn {
   isListening: boolean;
@@ -13,12 +13,12 @@ interface UseVoiceReturn {
 
 export const useVoice = (): UseVoiceReturn => {
   const [isListening, setIsListening] = useState(false);
-  const [transcript, setTranscript] = useState('');
+  const [transcript, setTranscript] = useState("");
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   // Check if browser supports Web Speech API
   const SpeechRecognition =
-    typeof window !== 'undefined' &&
+    typeof window !== "undefined" &&
     (window.SpeechRecognition || (window as any).webkitSpeechRecognition);
 
   const isSupported = !!SpeechRecognition;
@@ -32,20 +32,20 @@ export const useVoice = (): UseVoiceReturn => {
 
     // Auto-detect language from browser or default to Hindi
     const lang =
-      localStorage.getItem('selectedLanguage') === 'hi' ? 'hi-IN' : 'en-IN';
+      localStorage.getItem("selectedLanguage") === "hi" ? "hi-IN" : "en-IN";
     recognition.lang = lang;
 
     recognition.onstart = () => {
       setIsListening(true);
-      setTranscript('');
+      setTranscript("");
     };
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
-      let interim = '';
+      let interim = "";
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript;
         if (event.results[i].isFinal) {
-          setTranscript((prev) => prev + transcript + ' ');
+          setTranscript((prev) => prev + transcript + " ");
         } else {
           interim += transcript;
         }
@@ -53,7 +53,7 @@ export const useVoice = (): UseVoiceReturn => {
     };
 
     recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
-      console.error('Speech recognition error:', event.error);
+      console.error("Speech recognition error:", event.error);
       setIsListening(false);
     };
 
@@ -73,8 +73,8 @@ export const useVoice = (): UseVoiceReturn => {
     setIsListening(false);
   }, []);
 
-  const speak = useCallback((text: string, lang: string = 'en') => {
-    if (!('speechSynthesis' in window)) return;
+  const speak = useCallback((text: string, lang: string = "en") => {
+    if (!("speechSynthesis" in window)) return;
 
     // Cancel any ongoing speech
     window.speechSynthesis.cancel();
@@ -83,17 +83,17 @@ export const useVoice = (): UseVoiceReturn => {
 
     // Set language
     const langMap: Record<string, string> = {
-      en: 'en-US',
-      hi: 'hi-IN',
-      ta: 'ta-IN',
-      te: 'te-IN',
-      kn: 'kn-IN',
-      mr: 'mr-IN',
-      bn: 'bn-IN',
-      gu: 'gu-IN',
+      en: "en-US",
+      hi: "hi-IN",
+      ta: "ta-IN",
+      te: "te-IN",
+      kn: "kn-IN",
+      mr: "mr-IN",
+      bn: "bn-IN",
+      gu: "gu-IN",
     };
 
-    utterance.lang = langMap[lang] || 'en-US';
+    utterance.lang = langMap[lang] || "en-US";
     utterance.rate = 0.9;
     utterance.pitch = 1;
 
@@ -113,7 +113,7 @@ export const useVoice = (): UseVoiceReturn => {
   }, []);
 
   const stopSpeaking = useCallback(() => {
-    if ('speechSynthesis' in window) {
+    if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
       setIsSpeaking(false);
     }

@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { useLanguage } from "@/context/LanguageContext";
 import { useVoice } from "@/lib/useVoice";
-import { predictTeethDisease, getModelInfo, type PredictionResult } from "@/lib/aiPredictor";
+import {
+  predictTeethDisease,
+  getModelInfo,
+  type PredictionResult,
+} from "@/lib/aiPredictor";
 import {
   Upload,
   Mic,
@@ -35,15 +39,26 @@ const SYMPTOMS_LIST = [
 
 export default function Assess() {
   const { t, language } = useLanguage();
-  const { isListening, transcript, startListening, stopListening, isSupported: voiceSupported, speak } = useVoice();
+  const {
+    isListening,
+    transcript,
+    startListening,
+    stopListening,
+    isSupported: voiceSupported,
+    speak,
+  } = useVoice();
 
-  const [step, setStep] = useState<"initial" | "symptoms" | "upload" | "results">("initial");
+  const [step, setStep] = useState<
+    "initial" | "symptoms" | "upload" | "results"
+  >("initial");
   const [painLevel, setPainLevel] = useState(0);
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [healthScore, setHealthScore] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [aiPrediction, setAiPrediction] = useState<PredictionResult | null>(null);
+  const [aiPrediction, setAiPrediction] = useState<PredictionResult | null>(
+    null,
+  );
   const [modelMetrics, setModelMetrics] = useState<{
     trainingAccuracy: number;
     validationAccuracy: number;
@@ -52,7 +67,9 @@ export default function Assess() {
 
   const handleSymptomToggle = (symptom: string) => {
     setSelectedSymptoms((prev) =>
-      prev.includes(symptom) ? prev.filter((s) => s !== symptom) : [...prev, symptom]
+      prev.includes(symptom)
+        ? prev.filter((s) => s !== symptom)
+        : [...prev, symptom],
     );
   };
 
@@ -105,7 +122,11 @@ export default function Assess() {
       // Get AI prediction if image is uploaded
       if (uploadedImage) {
         try {
-          prediction = await predictTeethDisease(uploadedImage, painLevel, selectedSymptoms);
+          prediction = await predictTeethDisease(
+            uploadedImage,
+            painLevel,
+            selectedSymptoms,
+          );
           setAiPrediction(prediction);
         } catch (predictionError) {
           console.warn("Prediction failed, using demo mode:", predictionError);
@@ -115,13 +136,17 @@ export default function Assess() {
 
       // Calculate health score
       const baseScore = calculateHealthScore();
-      const finalScore = prediction ? Math.max(baseScore, prediction.healthScore) : baseScore;
+      const finalScore = prediction
+        ? Math.max(baseScore, prediction.healthScore)
+        : baseScore;
       setHealthScore(finalScore);
 
       // Speak result if text-to-speech is supported (with error handling)
       try {
         const resultMessage = `Your health score is ${Math.round(finalScore)}. ${
-          finalScore >= 80 ? "Your dental health looks good" : "Please consult a dentist"
+          finalScore >= 80
+            ? "Your dental health looks good"
+            : "Please consult a dentist"
         }`;
         speak(resultMessage, language);
       } catch (speakError) {
@@ -193,7 +218,8 @@ export default function Assess() {
             <div className="flex items-start gap-3">
               <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
               <p className="text-sm text-blue-800">
-                <strong>Demo Mode:</strong> ML service is currently unavailable. Showing simulated results for demonstration.
+                <strong>Demo Mode:</strong> ML service is currently unavailable.
+                Showing simulated results for demonstration.
               </p>
             </div>
           </div>
@@ -386,7 +412,9 @@ export default function Assess() {
                   {/* AI Info */}
                   <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
                     <p className="text-sm text-blue-800">
-                      <strong>AI Analysis:</strong> Your uploaded image will be analyzed using a deep learning model. You'll receive predictions with confidence scores.
+                      <strong>AI Analysis:</strong> Your uploaded image will be
+                      analyzed using a deep learning model. You'll receive
+                      predictions with confidence scores.
                     </p>
                   </div>
 
@@ -503,7 +531,9 @@ export default function Assess() {
 
                   <div className="space-y-4">
                     <div className="p-4 bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg border-l-4 border-primary">
-                      <p className="text-sm text-gray-600 mb-1">Detected Condition</p>
+                      <p className="text-sm text-gray-600 mb-1">
+                        Detected Condition
+                      </p>
                       <p className="text-2xl font-bold text-gray-900">
                         {aiPrediction.disease}
                       </p>
@@ -518,7 +548,10 @@ export default function Assess() {
                           {Object.entries(aiPrediction.allPredictions)
                             .sort(([, a], [, b]) => b - a)
                             .map(([condition, confidence]) => (
-                              <div key={condition} className="flex items-center gap-3">
+                              <div
+                                key={condition}
+                                className="flex items-center gap-3"
+                              >
                                 <span className="text-sm text-gray-700 flex-1">
                                   {condition}
                                 </span>
@@ -540,7 +573,9 @@ export default function Assess() {
                     {aiPrediction.isDemoMode && (
                       <div className="p-3 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
                         <p className="text-xs text-yellow-800">
-                          ⚠️ <strong>Demo Mode:</strong> This is a simulated prediction. Please consult a professional dentist for accurate diagnosis.
+                          ⚠️ <strong>Demo Mode:</strong> This is a simulated
+                          prediction. Please consult a professional dentist for
+                          accurate diagnosis.
                         </p>
                       </div>
                     )}
@@ -609,7 +644,8 @@ export default function Assess() {
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
                       <p className="text-green-800">
-                        Keep maintaining your dental health! Brush twice daily, floss regularly.
+                        Keep maintaining your dental health! Brush twice daily,
+                        floss regularly.
                       </p>
                     </div>
                   </div>

@@ -86,7 +86,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                             "w-full text-left px-3 py-2 rounded-lg text-sm transition",
                             language === code
                               ? "bg-primary text-white font-semibold"
-                              : "text-gray-700 hover:bg-gray-100"
+                              : "text-gray-700 hover:bg-gray-100",
                           )}
                         >
                           <span className="mr-2">{lang.flag}</span>
@@ -169,18 +169,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </h3>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li>
-                  <Link
-                    to="/assess"
-                    className="hover:text-primary transition"
-                  >
+                  <Link to="/assess" className="hover:text-primary transition">
                     {t("assessTeeth")}
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/doctors"
-                    className="hover:text-primary transition"
-                  >
+                  <Link to="/doctors" className="hover:text-primary transition">
                     {t("findDoctor")}
                   </Link>
                 </li>

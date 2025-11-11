@@ -11,41 +11,41 @@ export interface PredictionResult {
 // Demo predictions for when ML service is unavailable
 const DEMO_PREDICTIONS = [
   {
-    disease: 'Cavity',
+    disease: "Cavity",
     confidence: 0.85,
     allPredictions: {
       Cavity: 85,
-      'Tooth Decay': 8,
+      "Tooth Decay": 8,
       Gingivitis: 4,
       Healthy: 3,
     },
   },
   {
-    disease: 'Gingivitis',
+    disease: "Gingivitis",
     confidence: 0.79,
     allPredictions: {
       Gingivitis: 79,
-      'Gum Disease': 12,
+      "Gum Disease": 12,
       Cavity: 6,
       Healthy: 3,
     },
   },
   {
-    disease: 'Healthy Teeth',
+    disease: "Healthy Teeth",
     confidence: 0.92,
     allPredictions: {
       Healthy: 92,
-      'Minor Plaque': 5,
+      "Minor Plaque": 5,
       Cavity: 2,
       Gingivitis: 1,
     },
   },
   {
-    disease: 'Tooth Sensitivity',
+    disease: "Tooth Sensitivity",
     confidence: 0.73,
     allPredictions: {
-      'Tooth Sensitivity': 73,
-      'Enamel Erosion': 15,
+      "Tooth Sensitivity": 73,
+      "Enamel Erosion": 15,
       Cavity: 8,
       Healthy: 4,
     },
@@ -55,14 +55,14 @@ const DEMO_PREDICTIONS = [
 export async function predictTeethDisease(
   imageBase64: string,
   painLevel: number,
-  symptoms: string[]
+  symptoms: string[],
 ): Promise<PredictionResult> {
   try {
     // Try to fetch from the actual ML service
-    const response = await fetch('/api/predict', {
-      method: 'POST',
+    const response = await fetch("/api/predict", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         image: imageBase64,
@@ -76,16 +76,16 @@ export async function predictTeethDisease(
 
     const data = await response.json();
 
-    if (data.status === 'success' && data.prediction) {
+    if (data.status === "success" && data.prediction) {
       return {
         ...data.prediction,
         isDemoMode: false,
       };
     } else {
-      throw new Error(data.message || 'Prediction failed');
+      throw new Error(data.message || "Prediction failed");
     }
   } catch (error) {
-    console.warn('ML service unavailable, using demo mode:', error);
+    console.warn("ML service unavailable, using demo mode:", error);
 
     // Fallback to demo mode
     return generateDemoPrediction(painLevel, symptoms);
@@ -94,7 +94,7 @@ export async function predictTeethDisease(
 
 function generateDemoPrediction(
   painLevel: number,
-  symptoms: string[]
+  symptoms: string[],
 ): PredictionResult {
   // Select demo prediction based on pain level
   let selectedDemoIndex = 2; // Default to healthy
@@ -107,10 +107,7 @@ function generateDemoPrediction(
     selectedDemoIndex = 1; // Gingivitis
   }
 
-  if (
-    symptoms.includes('Bleeding gums') ||
-    symptoms.includes('Bad breath')
-  ) {
+  if (symptoms.includes("Bleeding gums") || symptoms.includes("Bad breath")) {
     selectedDemoIndex = 1; // Gingivitis
   }
 
@@ -134,12 +131,12 @@ export async function getModelInfo(): Promise<{
   isDemoMode: boolean;
 }> {
   try {
-    const response = await fetch('/api/model/info', {
+    const response = await fetch("/api/model/info", {
       signal: AbortSignal.timeout(5000),
     });
 
     if (!response.ok) {
-      throw new Error('Failed to fetch model info');
+      throw new Error("Failed to fetch model info");
     }
 
     const data = await response.json();
@@ -151,7 +148,7 @@ export async function getModelInfo(): Promise<{
       isDemoMode: false,
     };
   } catch (error) {
-    console.warn('Could not fetch model info, using defaults:', error);
+    console.warn("Could not fetch model info, using defaults:", error);
 
     // Return demo/default metrics
     return {
