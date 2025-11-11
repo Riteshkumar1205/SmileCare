@@ -119,10 +119,10 @@ export default function Consult() {
                       <h2 className="font-bold text-gray-900">
                         {consultant.name}
                       </h2>
-                      <p className="text-sm text-green-600 flex items-center gap-1">
+                      <div className="text-sm text-green-600 flex items-center gap-1">
                         <div className="w-2 h-2 bg-green-600 rounded-full" />
-                        Connected
-                      </p>
+                        <span>Connected</span>
+                      </div>
                     </div>
                   </div>
 
