@@ -30,61 +30,71 @@ export default function Index() {
     {
       icon: <Wifi className="w-8 h-8" />,
       title: "Fully Offline AI Detection",
-      description: "AI detection runs entirely on-device without internet. Zero dependency on cloud services.",
+      description:
+        "AI detection runs entirely on-device without internet. Zero dependency on cloud services.",
       badge: "🚀 Core Tech",
     },
     {
       icon: <Mic className="w-8 h-8" />,
       title: "Multi-Language Voice Interaction",
-      description: "Speak symptoms in Hindi, Marathi, Bengali, Tamil, or Telugu. Works completely offline without API dependency.",
+      description:
+        "Speak symptoms in Hindi, Marathi, Bengali, Tamil, or Telugu. Works completely offline without API dependency.",
       badge: "🗣️ Regional",
     },
     {
       icon: <Lightbulb className="w-8 h-8" />,
       title: "Explainable AI with Heatmaps",
-      description: "Visual highlights show exactly which teeth are affected. Builds patient trust with transparent AI decisions.",
+      description:
+        "Visual highlights show exactly which teeth are affected. Builds patient trust with transparent AI decisions.",
       badge: "👁️ Trust",
     },
     {
       icon: <Users className="w-8 h-8" />,
       title: "Health Worker Multi-Screening",
-      description: "ASHA and Anganwadi workers can scan multiple people. Records saved offline for village health programs.",
+      description:
+        "ASHA and Anganwadi workers can scan multiple people. Records saved offline for village health programs.",
       badge: "👥 Community",
     },
     {
       icon: <Database className="w-8 h-8" />,
       title: "Offline Database + Auto Sync",
-      description: "All data saved locally. Automatically syncs to cloud when internet returns. Works seamlessly offline.",
+      description:
+        "All data saved locally. Automatically syncs to cloud when internet returns. Works seamlessly offline.",
       badge: "💾 Smart Sync",
     },
     {
       icon: <Radio className="w-8 h-8" />,
       title: "Solar-Powered Portable Kiosk",
-      description: "Raspberry Pi + Camera setup runs on solar power. Deploy anywhere—schools, PHCs, villages, camps.",
+      description:
+        "Raspberry Pi + Camera setup runs on solar power. Deploy anywhere—schools, PHCs, villages, camps.",
       badge: "☀️ Portable",
     },
     {
       icon: <Lock className="w-8 h-8" />,
       title: "On-Device Privacy & Security",
-      description: "Images and medical data never leave device unless you allow. HIPAA/ABDM privacy compliant.",
+      description:
+        "Images and medical data never leave device unless you allow. HIPAA/ABDM privacy compliant.",
       badge: "🔒 Privacy",
     },
     {
       icon: <MapPin className="w-8 h-8" />,
       title: "Govt Dentist Referral Pathway",
-      description: "Offline list of nearest government hospitals. Alerts sent to local PHC when network returns.",
+      description:
+        "Offline list of nearest government hospitals. Alerts sent to local PHC when network returns.",
       badge: "🏥 Healthcare",
     },
     {
       icon: <TrendingUp className="w-8 h-8" />,
       title: "Structured Triage Guidance",
-      description: "For each detection: Home remedies, 'See dentist soon', or 'Emergency warning'. Prevents misdiagnosis.",
+      description:
+        "For each detection: Home remedies, 'See dentist soon', or 'Emergency warning'. Prevents misdiagnosis.",
       badge: "⚠️ Smart Care",
     },
     {
       icon: <Cloud className="w-8 h-8" />,
       title: "On-Device Model Updates",
-      description: "Download improved AI models when connected. Continuous accuracy improvement without reinstalling.",
+      description:
+        "Download improved AI models when connected. Continuous accuracy improvement without reinstalling.",
       badge: "🧠 Learning",
     },
   ];
@@ -93,12 +103,14 @@ export default function Index() {
     {
       icon: <Zap className="w-8 h-8" />,
       title: "AI Teeth Assessment",
-      description: "Instant health analysis with explainable AI and visual heatmaps",
+      description:
+        "Instant health analysis with explainable AI and visual heatmaps",
     },
     {
       icon: <MapPin className="w-8 h-8" />,
       title: "Find Nearby Doctors",
-      description: "Locate best dentists in your region with offline database support",
+      description:
+        "Locate best dentists in your region with offline database support",
     },
     {
       icon: <Ambulance className="w-8 h-8" />,
@@ -110,22 +122,26 @@ export default function Index() {
   const useCases = [
     {
       title: "Rural Healthcare",
-      description: "Deploy in villages and remote areas with zero electricity requirements. Health workers screen entire communities.",
+      description:
+        "Deploy in villages and remote areas with zero electricity requirements. Health workers screen entire communities.",
       icon: "🏘️",
     },
     {
       title: "School Health Programs",
-      description: "Solar-powered kiosks for mass screening in schools. Records saved for each student securely.",
+      description:
+        "Solar-powered kiosks for mass screening in schools. Records saved for each student securely.",
       icon: "🎓",
     },
     {
       title: "Health Camps & Events",
-      description: "Portable offline screening. Multiple health workers document patient records simultaneously.",
+      description:
+        "Portable offline screening. Multiple health workers document patient records simultaneously.",
       icon: "📋",
     },
     {
       title: "PHC & Clinics",
-      description: "Integrated into government health centers. Real-time patient data with privacy-first approach.",
+      description:
+        "Integrated into government health centers. Real-time patient data with privacy-first approach.",
       icon: "🏥",
     },
   ];
@@ -148,12 +164,15 @@ export default function Index() {
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
                 Smart Dental Care,
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-                  {" "}Works Offline
+                  {" "}
+                  Works Offline
                 </span>
               </h1>
 
               <p className="text-xl text-gray-700 mb-10 leading-relaxed max-w-xl">
-                Revolutionary AI detection that works without internet. Empowering healthcare workers, villages, and clinics with privacy-first technology.
+                Revolutionary AI detection that works without internet.
+                Empowering healthcare workers, villages, and clinics with
+                privacy-first technology.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -175,15 +194,21 @@ export default function Index() {
               <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-300">
                 <div>
                   <p className="text-3xl font-bold text-primary">50K+</p>
-                  <p className="text-sm text-gray-600 font-medium">Users Helped</p>
+                  <p className="text-sm text-gray-600 font-medium">
+                    Users Helped
+                  </p>
                 </div>
                 <div>
                   <p className="text-3xl font-bold text-primary">24/7</p>
-                  <p className="text-sm text-gray-600 font-medium">No Internet Needed</p>
+                  <p className="text-sm text-gray-600 font-medium">
+                    No Internet Needed
+                  </p>
                 </div>
                 <div>
                   <p className="text-3xl font-bold text-primary">100%</p>
-                  <p className="text-sm text-gray-600 font-medium">Private & Secure</p>
+                  <p className="text-sm text-gray-600 font-medium">
+                    Private & Secure
+                  </p>
                 </div>
               </div>
             </div>
@@ -214,10 +239,14 @@ export default function Index() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              10 Features That <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Transform Dental Care</span>
+              10 Features That{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+                Transform Dental Care
+              </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Advanced AI detection, offline-first architecture, and privacy-by-design. Deploy anywhere — no cloud dependency required.
+              Advanced AI detection, offline-first architecture, and
+              privacy-by-design. Deploy anywhere — no cloud dependency required.
             </p>
           </div>
 
@@ -269,19 +298,23 @@ export default function Index() {
             {[
               {
                 title: "🚀 Offline-First",
-                description: "AI model runs entirely on-device. Zero cloud dependency.",
+                description:
+                  "AI model runs entirely on-device. Zero cloud dependency.",
               },
               {
                 title: "🗣️ Regional Languages",
-                description: "Hindi, Marathi, Bengali, Tamil, Telugu voice support—offline.",
+                description:
+                  "Hindi, Marathi, Bengali, Tamil, Telugu voice support—offline.",
               },
               {
                 title: "🔒 Privacy-By-Design",
-                description: "HIPAA/ABDM compliant. Data never leaves device without consent.",
+                description:
+                  "HIPAA/ABDM compliant. Data never leaves device without consent.",
               },
               {
                 title: "☀️ Zero Electricity",
-                description: "Solar-powered portable kiosk for remote deployments.",
+                description:
+                  "Solar-powered portable kiosk for remote deployments.",
               },
             ].map((item, idx) => (
               <div
@@ -307,7 +340,8 @@ export default function Index() {
               Real-World Impact
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Deployed in rural healthcare, schools, government clinics, and health camps
+              Deployed in rural healthcare, schools, government clinics, and
+              health camps
             </p>
           </div>
 
@@ -364,7 +398,11 @@ export default function Index() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
-                Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">SmileCare</span> is Different
+                Why{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+                  SmileCare
+                </span>{" "}
+                is Different
               </h2>
 
               <div className="space-y-6">
@@ -380,7 +418,9 @@ export default function Index() {
                 ].map((benefit, index) => (
                   <div key={index} className="flex items-start gap-4">
                     <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                    <span className="text-lg text-gray-700 font-medium">{benefit}</span>
+                    <span className="text-lg text-gray-700 font-medium">
+                      {benefit}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -391,18 +431,28 @@ export default function Index() {
                 <div className="space-y-8">
                   <div className="bg-white rounded-2xl p-6 border-2 border-gray-100 shadow-lg">
                     <Shield className="w-8 h-8 text-primary mb-3" />
-                    <p className="font-bold text-gray-900 mb-2">Enterprise Security</p>
-                    <p className="text-sm text-gray-600">Military-grade encryption, HIPAA-compliant</p>
+                    <p className="font-bold text-gray-900 mb-2">
+                      Enterprise Security
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      Military-grade encryption, HIPAA-compliant
+                    </p>
                   </div>
                   <div className="bg-white rounded-2xl p-6 border-2 border-gray-100 shadow-lg">
                     <Globe className="w-8 h-8 text-accent mb-3" />
                     <p className="font-bold text-gray-900 mb-2">Global Reach</p>
-                    <p className="text-sm text-gray-600">Available in 8+ languages across regions</p>
+                    <p className="text-sm text-gray-600">
+                      Available in 8+ languages across regions
+                    </p>
                   </div>
                   <div className="bg-white rounded-2xl p-6 border-2 border-gray-100 shadow-lg">
                     <TrendingUp className="w-8 h-8 text-primary mb-3" />
-                    <p className="font-bold text-gray-900 mb-2">Proven Results</p>
-                    <p className="text-sm text-gray-600">4.9★ Rating | 50K+ Users | 95%+ Accuracy</p>
+                    <p className="font-bold text-gray-900 mb-2">
+                      Proven Results
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      4.9★ Rating | 50K+ Users | 95%+ Accuracy
+                    </p>
                   </div>
                 </div>
               </div>
@@ -432,7 +482,9 @@ export default function Index() {
             ].map((stat, idx) => (
               <div key={idx} className="text-center">
                 <p className="text-5xl font-bold mb-2">{stat.number}</p>
-                <p className="text-lg text-white/80 font-medium">{stat.label}</p>
+                <p className="text-lg text-white/80 font-medium">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>
@@ -446,7 +498,8 @@ export default function Index() {
             Transform Dental Healthcare Today
           </h2>
           <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-            Join the revolution. AI-powered dental detection that works offline, anywhere, anytime.
+            Join the revolution. AI-powered dental detection that works offline,
+            anywhere, anytime.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

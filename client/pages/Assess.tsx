@@ -206,7 +206,6 @@ export default function Assess() {
         </div>
       </section>
 
-
       {/* Main Content */}
       <section className="py-12 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl">
@@ -550,7 +549,6 @@ export default function Assess() {
                         </div>
                       </div>
                     )}
-
                   </div>
                 </div>
               )}
