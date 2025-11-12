@@ -249,10 +249,29 @@ export default function Doctors() {
                 </div>
 
                 {/* Location Sharing */}
-                <button className="w-full px-4 py-2 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/5 transition flex items-center justify-center gap-2">
+                <button
+                  onClick={handleUseMyLocation}
+                  className="w-full px-4 py-2 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/5 transition flex items-center justify-center gap-2"
+                >
                   <MapPin className="w-4 h-4" />
-                  {t("useMyLocation")}
+                  {userLocation ? "📍 Location Found" : t("useMyLocation")}
                 </button>
+
+                {/* Location Error */}
+                {locationError && (
+                  <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-xs text-red-600">{locationError}</p>
+                  </div>
+                )}
+
+                {/* Location Status */}
+                {userLocation && (
+                  <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-xs text-green-600 font-semibold">
+                      ✓ Location enabled - showing nearest doctors
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
