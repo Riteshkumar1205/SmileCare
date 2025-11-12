@@ -351,7 +351,7 @@ export default function Assess() {
                 </h2>
 
                 <div className="space-y-6">
-                  {/* Image Upload */}
+                  {/* Image Upload with Preview */}
                   <div>
                     <label className="block">
                       <div
@@ -368,11 +368,23 @@ export default function Assess() {
                           className="hidden"
                         />
                         {uploadedImage ? (
-                          <div>
-                            <CheckCircle className="w-12 h-12 text-accent mx-auto mb-3" />
-                            <p className="font-semibold text-gray-900">
-                              {t("uploadImageReady")}
-                            </p>
+                          <div className="space-y-4">
+                            <div className="relative inline-block">
+                              <img
+                                src={uploadedImage}
+                                alt="Uploaded teeth"
+                                className="max-h-64 rounded-lg shadow-lg border-2 border-accent"
+                              />
+                            </div>
+                            <div>
+                              <CheckCircle className="w-12 h-12 text-accent mx-auto mb-3" />
+                              <p className="font-semibold text-gray-900">
+                                {t("uploadImageReady")}
+                              </p>
+                              <p className="text-sm text-gray-600 mt-2">
+                                Image preview ready for analysis
+                              </p>
+                            </div>
                           </div>
                         ) : (
                           <div>
