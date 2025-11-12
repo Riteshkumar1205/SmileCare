@@ -52,7 +52,7 @@ const consultants: Consultant[] = [
     availability: "Available now",
     rating: 4.9,
     responseTime: 1,
-    image: "👩‍⚕️",
+    image: "👩‍��️",
   },
 ];
 
@@ -187,19 +187,32 @@ export default function Consult() {
               {/* Chat Area */}
               <div className="lg:col-span-2 bg-white rounded-2xl border-2 border-gray-100 flex flex-col h-96">
                 {/* Header */}
-                <div className="border-b border-gray-200 p-6 flex items-center justify-between">
-                  <div className="flex items-center gap-4">
+                <div className="border-b border-gray-200 p-6 flex items-center justify-between bg-gradient-to-r from-primary/5 to-accent/5">
+                  <div className="flex items-center gap-4 flex-1">
                     <div className="text-4xl">{consultant.image}</div>
                     <div>
                       <h2 className="font-bold text-gray-900">
                         {consultant.name}
                       </h2>
                       <div className="text-sm text-green-600 flex items-center gap-1">
-                        <div className="w-2 h-2 bg-green-600 rounded-full" />
-                        <span>Connected</span>
+                        <div className="w-2 h-2 bg-green-600 rounded-full animate-pulse" />
+                        <span>
+                          {chatMode === "video"
+                            ? "Video Call Active"
+                            : chatMode === "call"
+                              ? "Audio Call Active"
+                              : "Connected"}
+                        </span>
                       </div>
                     </div>
                   </div>
+
+                  {/* Call Duration Timer */}
+                  {(chatMode === "video" || chatMode === "call") && (
+                    <div className="text-lg font-bold text-primary px-4 py-2 bg-white rounded-lg">
+                      {formatCallDuration(callDuration)}
+                    </div>
+                  )}
 
                   <div className="flex gap-2">
                     <button
@@ -209,6 +222,7 @@ export default function Consult() {
                           ? "bg-primary text-white"
                           : "text-gray-600 hover:bg-gray-100"
                       }`}
+                      title="Chat"
                     >
                       <MessageSquare className="w-5 h-5" />
                     </button>
@@ -219,6 +233,7 @@ export default function Consult() {
                           ? "bg-primary text-white"
                           : "text-gray-600 hover:bg-gray-100"
                       }`}
+                      title="Audio Call"
                     >
                       <Phone className="w-5 h-5" />
                     </button>
@@ -229,11 +244,106 @@ export default function Consult() {
                           ? "bg-primary text-white"
                           : "text-gray-600 hover:bg-gray-100"
                       }`}
+                      title="Video Call"
                     >
                       <Video className="w-5 h-5" />
                     </button>
                   </div>
                 </div>
+
+                {/* Video/Audio Call View */}
+                {(chatMode === "video" || chatMode === "call") && (
+                  <div className="bg-black/5 p-6 flex items-center justify-center min-h-64 relative">
+                    {chatMode === "video" ? (
+                      <div className="relative w-full aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="text-8xl mb-4">{consultant.image}</div>
+                          <p className="text-white font-semibold">
+                            Video Call Connected
+                          </p>
+                          <p className="text-gray-300 text-sm mt-2">
+                            {consultant.name}
+                          </p>
+                        </div>
+
+                        {/* Video Controls */}
+                        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3">
+                          <button
+                            onClick={() => setIsMicOn(!isMicOn)}
+                            className={`p-3 rounded-full transition ${
+                              isMicOn
+                                ? "bg-gray-600 text-white hover:bg-gray-700"
+                                : "bg-red-600 text-white hover:bg-red-700"
+                            }`}
+                            title={isMicOn ? "Mute" : "Unmute"}
+                          >
+                            {isMicOn ? (
+                              <Mic className="w-6 h-6" />
+                            ) : (
+                              <MicOff className="w-6 h-6" />
+                            )}
+                          </button>
+                          <button
+                            onClick={() => setIsVideoOn(!isVideoOn)}
+                            className={`p-3 rounded-full transition ${
+                              isVideoOn
+                                ? "bg-gray-600 text-white hover:bg-gray-700"
+                                : "bg-red-600 text-white hover:bg-red-700"
+                            }`}
+                            title={isVideoOn ? "Stop Video" : "Start Video"}
+                          >
+                            {isVideoOn ? (
+                              <Video className="w-6 h-6" />
+                            ) : (
+                              <VideoOff className="w-6 h-6" />
+                            )}
+                          </button>
+                          <button
+                            onClick={() => setConsultationStarted(false)}
+                            className="p-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition"
+                            title="End Call"
+                          >
+                            <PhoneOff className="w-6 h-6" />
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-center py-12">
+                        <div className="text-8xl mb-4">{consultant.image}</div>
+                        <p className="text-gray-900 font-semibold text-xl">
+                          {consultant.name}
+                        </p>
+                        <p className="text-gray-600 mt-2">Audio Call Connected</p>
+
+                        {/* Audio Controls */}
+                        <div className="flex gap-3 justify-center mt-8">
+                          <button
+                            onClick={() => setIsMicOn(!isMicOn)}
+                            className={`p-4 rounded-full transition ${
+                              isMicOn
+                                ? "bg-primary text-white hover:bg-primary/90"
+                                : "bg-red-600 text-white hover:bg-red-700"
+                            }`}
+                            title={isMicOn ? "Mute" : "Unmute"}
+                          >
+                            {isMicOn ? (
+                              <Mic className="w-6 h-6" />
+                            ) : (
+                              <MicOff className="w-6 h-6" />
+                            )}
+                          </button>
+                          <button
+                            onClick={() => setConsultationStarted(false)}
+                            className="p-4 bg-red-600 text-white rounded-full hover:bg-red-700 transition"
+                            title="End Call"
+                          >
+                            <PhoneOff className="w-6 h-6" />
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {/* Messages */}
                 <div className="flex-1 overflow-y-auto p-6 space-y-4">
