@@ -75,30 +75,81 @@ export default function Consult() {
     ]);
   };
 
+  const generateAIResponse = (userMessage: string) => {
+    const lowerMessage = userMessage.toLowerCase();
+
+    // AI responses based on keywords
+    if (
+      lowerMessage.includes("pain") ||
+      lowerMessage.includes("hurt") ||
+      lowerMessage.includes("ache")
+    ) {
+      return "I understand you're experiencing pain. Can you describe the location and intensity? This will help me provide better guidance. Meanwhile, try rinsing with warm salt water.";
+    }
+    if (
+      lowerMessage.includes("sensitivity") ||
+      lowerMessage.includes("sensitive")
+    ) {
+      return "Tooth sensitivity is common. Avoid acidic foods and beverages. Use a soft-bristled toothbrush and sensitivity toothpaste. If it persists, we should schedule an in-person examination.";
+    }
+    if (
+      lowerMessage.includes("bleed") ||
+      lowerMessage.includes("bleeding") ||
+      lowerMessage.includes("gum")
+    ) {
+      return "Bleeding gums may indicate gum disease or gingivitis. Improve your oral hygiene - brush twice daily and floss. If bleeding continues for more than a week, an in-person visit is recommended.";
+    }
+    if (
+      lowerMessage.includes("cavity") ||
+      lowerMessage.includes("decay") ||
+      lowerMessage.includes("black spot")
+    ) {
+      return "Cavities require professional treatment. I recommend scheduling an appointment for a proper examination and filling. Avoid very hot/cold foods in the meantime.";
+    }
+    if (
+      lowerMessage.includes("bad breath") ||
+      lowerMessage.includes("halitosis")
+    ) {
+      return "Bad breath can stem from poor oral hygiene, diet, or underlying conditions. Brush your tongue, floss daily, and use mouthwash. Increase water intake. If the problem persists, we should investigate further.";
+    }
+    if (lowerMessage.includes("whitening") || lowerMessage.includes("white")) {
+      return "Professional whitening treatments are available. For best results, we recommend in-office whitening which provides faster and longer-lasting results than over-the-counter options.";
+    }
+    if (lowerMessage.includes("cost") || lowerMessage.includes("price")) {
+      return "The cost depends on the treatment required. Let's first understand your condition through this consultation, then I can provide you with an accurate estimate.";
+    }
+
+    // Default response
+    return "Thank you for sharing that information. Based on what you've described, I recommend we schedule an in-person visit for a thorough examination. In the meantime, maintain good oral hygiene and avoid trigger foods.";
+  };
+
   const handleSendMessage = () => {
     if (!inputMessage.trim()) return;
 
+    const userMsg = inputMessage.trim();
     setMessages([
       ...messages,
       {
         id: messages.length + 1,
-        text: inputMessage,
+        text: userMsg,
         sender: "user",
       },
     ]);
 
+    setInputMessage("");
+
+    // Simulate AI doctor response with slight delay
     setTimeout(() => {
+      const aiResponse = generateAIResponse(userMsg);
       setMessages((prev) => [
         ...prev,
         {
           id: prev.length + 1,
-          text: "Thank you for sharing. Based on what you've told me, I recommend...",
+          text: aiResponse,
           sender: "doctor",
         },
       ]);
-    }, 1000);
-
-    setInputMessage("");
+    }, 800);
   };
 
   const consultant = consultants.find((c) => c.id === selectedConsultant);
