@@ -257,7 +257,9 @@ export default function Consult() {
                     {chatMode === "video" ? (
                       <div className="relative w-full aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
                         <div className="text-center">
-                          <div className="text-8xl mb-4">{consultant.image}</div>
+                          <div className="text-8xl mb-4">
+                            {consultant.image}
+                          </div>
                           <p className="text-white font-semibold">
                             Video Call Connected
                           </p>
@@ -313,7 +315,9 @@ export default function Consult() {
                         <p className="text-gray-900 font-semibold text-xl">
                           {consultant.name}
                         </p>
-                        <p className="text-gray-600 mt-2">Audio Call Connected</p>
+                        <p className="text-gray-600 mt-2">
+                          Audio Call Connected
+                        </p>
 
                         {/* Audio Controls */}
                         <div className="flex gap-3 justify-center mt-8">

@@ -81,12 +81,15 @@ export async function predictTeethDisease(
       return {
         disease: prediction.disease || prediction.predicted_class || "Unknown",
         confidence: prediction.confidence || prediction.model_accuracy || 0,
-        healthScore: prediction.healthScore !== undefined
-          ? prediction.healthScore
-          : 100 - (prediction.confidence || 0),
+        healthScore:
+          prediction.healthScore !== undefined
+            ? prediction.healthScore
+            : 100 - (prediction.confidence || 0),
         allPredictions: prediction.allPredictions || {},
-        modelAccuracy: prediction.modelAccuracy || prediction.model_accuracy || 80,
-        trainingAccuracy: prediction.trainingAccuracy || prediction.training_accuracy || 81,
+        modelAccuracy:
+          prediction.modelAccuracy || prediction.model_accuracy || 80,
+        trainingAccuracy:
+          prediction.trainingAccuracy || prediction.training_accuracy || 81,
         isDemoMode: false,
       };
     } else {

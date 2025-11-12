@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { X, Calendar, Clock, User, Phone, Mail, CheckCircle } from "lucide-react";
+import {
+  X,
+  Calendar,
+  Clock,
+  User,
+  Phone,
+  Mail,
+  CheckCircle,
+} from "lucide-react";
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -36,7 +44,9 @@ export default function BookingModal({
   });
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -75,7 +85,7 @@ export default function BookingModal({
 
   // Get today's date in YYYY-MM-DD format
   const today = new Date().toISOString().split("T")[0];
-  
+
   // Available time slots
   const timeSlots = [
     "09:00 AM",
@@ -255,7 +265,9 @@ export default function BookingModal({
                 </div>
                 <div>
                   <p className="text-xs text-gray-600">Confirmation sent to</p>
-                  <p className="font-semibold text-gray-900">{formData.email}</p>
+                  <p className="font-semibold text-gray-900">
+                    {formData.email}
+                  </p>
                 </div>
               </div>
               <p className="text-sm text-gray-600 mb-6">

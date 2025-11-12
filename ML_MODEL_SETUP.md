@@ -1,6 +1,7 @@
 # ML Model Setup Guide
 
 ## Prerequisites
+
 - Python 3.8+
 - TensorFlow 2.x
 - pip or conda
@@ -17,6 +18,7 @@ pip install -r requirements.txt
 ### 2. Prepare Model File
 
 Place your ResNet50 teeth disease model at:
+
 ```
 ml_service/models/teeth_disease_model_resnet50.h5
 ```
@@ -27,6 +29,7 @@ ml_service/models/teeth_disease_model_resnet50.h5
 2. Rename it to `teeth_disease_model_resnet50.h5` (remove spaces and numbers)
 
 Folder structure should look like:
+
 ```
 ml_service/
 ├── models/
@@ -41,6 +44,7 @@ ml_service/
 ### 3. Create .env File
 
 Create `ml_service/.env`:
+
 ```
 FLASK_PORT=5000
 MODEL_PATH=./models/teeth_disease_model_resnet50.h5
@@ -59,11 +63,13 @@ The service will start at `http://localhost:5000`
 ### 5. Auto-start with Development Server
 
 The ML service should start automatically when you run:
+
 ```bash
 npm run dev
 ```
 
 This will:
+
 - Start the Node.js backend at `http://localhost:3000`
 - Start the ML service at `http://localhost:5000`
 - Start the Vite frontend dev server
@@ -71,22 +77,27 @@ This will:
 ### Troubleshooting
 
 **Model not loading?**
+
 - Ensure the model file path is correct
 - Check file permissions
 - Verify TensorFlow is installed: `pip list | grep tensorflow`
 
 **Port already in use?**
+
 - Change FLASK_PORT in `.env` to a different port
 - Update `ML_SERVICE_URL` in the main `.env` accordingly
 
 **CORS errors?**
+
 - Flask CORS is enabled in app.py
 - Ensure both servers are running
 
 ## API Endpoints
 
 ### GET `/api/model/info`
+
 Get model information and accuracy metrics
+
 ```json
 {
   "status": "success",
@@ -99,7 +110,9 @@ Get model information and accuracy metrics
 ```
 
 ### POST `/api/predict`
+
 Make a prediction on an image
+
 ```json
 {
   "status": "success",

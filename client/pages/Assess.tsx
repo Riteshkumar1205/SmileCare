@@ -134,7 +134,10 @@ export default function Assess() {
           );
           setAiPrediction(prediction);
         } catch (predictionError) {
-          console.warn("Prediction failed, using manual calculation:", predictionError);
+          console.warn(
+            "Prediction failed, using manual calculation:",
+            predictionError,
+          );
         }
       }
 

@@ -3,33 +3,39 @@
 ## ✅ What's Been Implemented
 
 ### 1. **Image Upload with Live Preview** ✓
+
 - Images now display during upload on the Assess page
 - Instant visual feedback before analysis
 - File size validation (max 10MB)
 
 ### 2. **Realistic Health Score Calculation** ✓
+
 - Health scores now based on actual AI prediction confidence
 - Pain levels and symptoms weighted appropriately
 - No more random values - uses real model data
 
 ### 3. **AI Model Integration** ✓
+
 - Backend properly configured to use ResNet50 model
 - Updated Flask app to load model from correct path
 - Realistic accuracy metrics: 92.5% training, 89.3% validation
 
 ### 4. **Explainable AI with Heatmap** ✓
+
 - Visual heatmap showing infected/damaged tooth regions
 - Color-coded severity levels (Red=Critical, Orange=Warning, Yellow=Caution, Green=Good)
 - Confidence percentages displayed for each tooth
 - Builds user trust with transparent AI decisions
 
 ### 5. **GPS/Location Finding** ✓
+
 - Real geolocation integration on Doctors page
 - Doctors sorted by distance from user location
 - "Use My Location" button with permission handling
 - Location status display
 
 ### 6. **Doctor Booking System** ✓
+
 - Full booking modal with date/time selection
 - Time slot picker with available appointments
 - Confirmation screen with booking details
@@ -37,12 +43,14 @@
 - Integrated into Doctors page
 
 ### 7. **AI Chat Responses** ✓
+
 - Context-aware responses based on symptoms
 - Handles pain, sensitivity, bleeding, cavities, whitening, pricing queries
 - Intelligent fallback responses
 - Natural conversation flow
 
 ### 8. **Video/Audio Call Features** ✓
+
 - Real-time call duration timer
 - Audio call interface with doctor profile
 - Video call interface with video placeholder
@@ -52,6 +60,7 @@
 - Animated connection indicator
 
 ### 9. **Model File Setup** ✓
+
 - Documentation for placing model file
 - Correct path configuration in Flask app
 - Fallback metrics if model not loaded
@@ -72,6 +81,7 @@ cp "C:\Users\rites\Downloads\teeth_disease_model_resnet50 (1).h5" ml_service/mod
 ```
 
 Folder structure should be:
+
 ```
 ml_service/
 ├── models/
@@ -89,6 +99,7 @@ pip install -r requirements.txt
 ```
 
 **Required packages:**
+
 - tensorflow
 - flask
 - flask-cors
@@ -122,6 +133,7 @@ npm run dev
 ```
 
 This starts:
+
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:3000`
 
@@ -132,6 +144,7 @@ Visit `http://localhost:5173` in your browser.
 ## 📱 Feature Usage
 
 ### Assess Teeth (AI Detection)
+
 1. Navigate to "Assess Teeth"
 2. Select pain level (1-5)
 3. Choose symptoms from list
@@ -145,6 +158,7 @@ Visit `http://localhost:5173` in your browser.
    - Model accuracy metrics
 
 ### Find Doctors
+
 1. Navigate to "Find Doctor"
 2. Click "Use My Location" for GPS
 3. Filter by specialty
@@ -158,6 +172,7 @@ Visit `http://localhost:5173` in your browser.
 8. Confirm booking - **get confirmation page**
 
 ### Consult with Dentist
+
 1. Navigate to "Consult Now"
 2. Select a consultant
 3. Start consultation
@@ -172,6 +187,7 @@ Visit `http://localhost:5173` in your browser.
 ## 🔧 API Endpoints
 
 ### Model Info
+
 ```
 GET /api/model/info
 Response:
@@ -185,6 +201,7 @@ Response:
 ```
 
 ### Make Prediction
+
 ```
 POST /api/predict
 Body: { "image": "base64_string" }
@@ -212,6 +229,7 @@ Response:
 ## 🎯 Feature Details
 
 ### Health Score Calculation
+
 - **With AI Prediction**: `100 - prediction_confidence`
   - 85% cavity confidence → 15% health score ✓
 
@@ -222,6 +240,7 @@ Response:
   - Range: 0-100
 
 ### Heatmap Visualization
+
 - Shows 8 tooth positions (upper/lower, left/right)
 - Color intensity based on disease severity
 - Hover tooltips show tooth location
@@ -229,7 +248,9 @@ Response:
 - AI explanation below visualization
 
 ### AI Chat Context-Aware Responses
+
 Handles questions about:
+
 - ✓ Pain & sensitivity
 - ✓ Bleeding gums & gingivitis
 - ✓ Cavities & tooth decay
@@ -239,6 +260,7 @@ Handles questions about:
 - ✓ General dental advice
 
 ### Video/Audio Call
+
 - Call duration timer (MM:SS format)
 - Microphone toggle (on/off, visual indicator)
 - Camera toggle (for video call)
@@ -251,21 +273,25 @@ Handles questions about:
 ## 🐛 Troubleshooting
 
 ### Model not loading?
+
 1. Check file path in `ml_service/.env`
 2. Verify model file exists: `ml_service/models/teeth_disease_model_resnet50.h5`
 3. Check TensorFlow is installed: `pip list | grep tensorflow`
 4. Check Flask app logs for errors
 
 ### Port conflicts?
+
 - Change FLASK_PORT in `.env` to unused port (e.g., 5001)
 - Update ML_SERVICE_URL in main `.env` accordingly
 
 ### Geolocation not working?
+
 - Enable HTTPS or use localhost (browser security)
 - Allow location permission when prompted
 - Check browser geolocation settings
 
 ### Images not uploading?
+
 - Check file size (max 10MB)
 - Supported formats: PNG, JPG, JPEG
 - Check browser console for errors
@@ -275,6 +301,7 @@ Handles questions about:
 ## 📊 Model Performance Metrics
 
 **ResNet50 Teeth Disease Model:**
+
 - Training Accuracy: 92.5%
 - Validation Accuracy: 89.3%
 - Classes: Cavity, Gingivitis, Healthy, Tooth Decay, Plaque
@@ -309,6 +336,7 @@ Handles questions about:
 ## 📝 Environment Variables
 
 ### Main App (.env)
+
 ```
 VITE_API_URL=http://localhost:3000
 ML_SERVICE_URL=http://localhost:5000
@@ -316,6 +344,7 @@ PING_MESSAGE=pong
 ```
 
 ### ML Service (ml_service/.env)
+
 ```
 FLASK_PORT=5000
 MODEL_PATH=./models/teeth_disease_model_resnet50.h5
@@ -344,6 +373,7 @@ KAGGLE_KEY=
 ## 📞 Support
 
 For issues or questions:
+
 1. Check the troubleshooting section
 2. Review Flask app logs
 3. Check browser console (F12)

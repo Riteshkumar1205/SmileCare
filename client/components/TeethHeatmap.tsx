@@ -143,19 +143,31 @@ export default function TeethHeatmap({
         {/* Legend */}
         <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded" style={{ backgroundColor: "rgba(255, 0, 0, 0.7)" }} />
+            <div
+              className="w-4 h-4 rounded"
+              style={{ backgroundColor: "rgba(255, 0, 0, 0.7)" }}
+            />
             <span className="text-xs text-gray-600">Critical (80%+)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded" style={{ backgroundColor: "rgba(255, 165, 0, 0.6)" }} />
+            <div
+              className="w-4 h-4 rounded"
+              style={{ backgroundColor: "rgba(255, 165, 0, 0.6)" }}
+            />
             <span className="text-xs text-gray-600">Warning (60-80%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded" style={{ backgroundColor: "rgba(255, 255, 0, 0.5)" }} />
+            <div
+              className="w-4 h-4 rounded"
+              style={{ backgroundColor: "rgba(255, 255, 0, 0.5)" }}
+            />
             <span className="text-xs text-gray-600">Caution (40-60%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded" style={{ backgroundColor: "rgba(144, 238, 144, 0.5)" }} />
+            <div
+              className="w-4 h-4 rounded"
+              style={{ backgroundColor: "rgba(144, 238, 144, 0.5)" }}
+            />
             <span className="text-xs text-gray-600">Good (&lt;40%)</span>
           </div>
         </div>
@@ -194,16 +206,20 @@ export default function TeethHeatmap({
         </p>
         <ul className="text-sm text-blue-800 space-y-2">
           <li>
-            ✓ <strong>Heatmap Zones:</strong> Colored regions show affected tooth areas based on AI analysis
+            ✓ <strong>Heatmap Zones:</strong> Colored regions show affected
+            tooth areas based on AI analysis
           </li>
           <li>
-            ✓ <strong>Confidence Scores:</strong> Percentages indicate AI certainty for each area
+            ✓ <strong>Confidence Scores:</strong> Percentages indicate AI
+            certainty for each area
           </li>
           <li>
-            ✓ <strong>Color Coding:</strong> Red=Critical, Orange=Warning, Yellow=Caution, Green=Healthy
+            ✓ <strong>Color Coding:</strong> Red=Critical, Orange=Warning,
+            Yellow=Caution, Green=Healthy
           </li>
           <li>
-            ✓ <strong>Not a Diagnosis:</strong> Always consult a licensed dentist for professional evaluation
+            ✓ <strong>Not a Diagnosis:</strong> Always consult a licensed
+            dentist for professional evaluation
           </li>
         </ul>
       </div>
