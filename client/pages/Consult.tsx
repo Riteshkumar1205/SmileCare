@@ -10,6 +10,10 @@ import {
   Star,
   Send,
   ArrowRight,
+  Mic,
+  MicOff,
+  VideoOff,
+  PhoneOff,
 } from "lucide-react";
 
 interface Consultant {
@@ -62,6 +66,26 @@ export default function Consult() {
   >([]);
   const [inputMessage, setInputMessage] = useState("");
   const [consultationStarted, setConsultationStarted] = useState(false);
+  const [callDuration, setCallDuration] = useState(0);
+  const [isMicOn, setIsMicOn] = useState(true);
+  const [isVideoOn, setIsVideoOn] = useState(true);
+
+  // Simulate call duration timer
+  React.useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (consultationStarted) {
+      interval = setInterval(() => {
+        setCallDuration((prev) => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [consultationStarted]);
+
+  const formatCallDuration = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  };
 
   const handleSelectConsultant = (id: number) => {
     setSelectedConsultant(id);
