@@ -108,6 +108,40 @@ export default function Doctors() {
     "distance",
   );
   const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
+  const [userLocation, setUserLocation] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
+  const [locationError, setLocationError] = useState<string | null>(null);
+
+  const handleUseMyLocation = () => {
+    if (!navigator.geolocation) {
+      setLocationError("Geolocation not supported by your browser");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setUserLocation({ lat: latitude, lng: longitude });
+        setLocationError(null);
+
+        // Calculate distances from user location
+        // Mock coordinates for doctors (in a real app, you'd calculate actual distances)
+        const updatedDoctors = mockDoctors.map((doc) => ({
+          ...doc,
+          distance: Math.round((Math.random() * 8 + 1) * 10) / 10, // Random distance 1-8km
+        }));
+        setDoctors(updatedDoctors.sort((a, b) => a.distance - b.distance));
+      },
+      (error) => {
+        setLocationError(
+          "Unable to access location. Please enable location services.",
+        );
+        console.error("Location error:", error);
+      },
+    );
+  };
 
   const specialties = [
     "All",
