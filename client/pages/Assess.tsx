@@ -133,16 +133,14 @@ export default function Assess() {
           );
           setAiPrediction(prediction);
         } catch (predictionError) {
-          console.warn("Prediction failed, using demo mode:", predictionError);
-          // Demo prediction already handled in predictTeethDisease
+          console.warn("Prediction failed, using manual calculation:", predictionError);
         }
       }
 
-      // Calculate health score
-      const baseScore = calculateHealthScore();
+      // Calculate health score based on AI prediction or manual assessment
       const finalScore = prediction
-        ? Math.max(baseScore, prediction.healthScore)
-        : baseScore;
+        ? calculateHealthScore(prediction.confidence)
+        : calculateHealthScore();
       setHealthScore(finalScore);
 
       // Speak result if text-to-speech is supported (with error handling)
