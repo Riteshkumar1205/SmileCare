@@ -21,8 +21,14 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-# Initialize model
-model = TeethDiseaseModel(model_path=os.getenv("MODEL_PATH", "./models/teeth_disease_model.h5"))
+# Initialize model with priority to use ResNet50 model if available
+model_path = os.getenv("MODEL_PATH", "./models/teeth_disease_model_resnet50.h5")
+if not os.path.exists(model_path):
+    # Fallback to default model path
+    model_path = "./models/teeth_disease_model.h5"
+
+logger.info(f"Using model path: {model_path}")
+model = TeethDiseaseModel(model_path=model_path)
 
 # Global variables for training state
 training_state = {
