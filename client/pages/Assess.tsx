@@ -88,10 +88,18 @@ export default function Assess() {
     }
   };
 
-  const calculateHealthScore = () => {
+  const calculateHealthScore = (aiConfidence?: number) => {
+    if (aiConfidence !== undefined) {
+      // If AI prediction available, base score on disease confidence
+      // Lower confidence = healthier teeth
+      const healthScore = 100 - aiConfidence;
+      return Math.max(0, Math.min(100, healthScore));
+    }
+
+    // Manual calculation when no AI prediction
     let score = 100;
-    score -= (painLevel - 1) * 10;
-    score -= selectedSymptoms.length * 5;
+    score -= (painLevel - 1) * 15; // Pain level has more weight
+    score -= selectedSymptoms.length * 8; // Each symptom reduces score
     return Math.max(0, Math.min(100, score));
   };
 
