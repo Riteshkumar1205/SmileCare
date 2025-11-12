@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import BookingModal from "@/components/BookingModal";
 import { useLanguage } from "@/context/LanguageContext";
 import {
   MapPin,
@@ -13,6 +14,7 @@ import {
   Search,
   Phone,
   Users,
+  Calendar,
 } from "lucide-react";
 
 interface Doctor {
@@ -113,6 +115,7 @@ export default function Doctors() {
     lng: number;
   } | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   const handleUseMyLocation = () => {
     if (!navigator.geolocation) {
@@ -389,14 +392,21 @@ export default function Doctors() {
                   </p>
 
                   <div className="flex flex-col gap-3">
+                    <button
+                      onClick={() => setIsBookingOpen(true)}
+                      className="w-full px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition flex items-center justify-center gap-2"
+                    >
+                      <Calendar className="w-5 h-5" />
+                      Book Appointment
+                    </button>
                     <Link
                       to="/consult"
-                      className="w-full px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition flex items-center justify-center gap-2"
+                      className="w-full px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/5 transition flex items-center justify-center gap-2"
                     >
                       <MessageSquare className="w-5 h-5" />
                       Consult Now
                     </Link>
-                    <button className="w-full px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/5 transition flex items-center justify-center gap-2">
+                    <button className="w-full px-6 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition flex items-center justify-center gap-2">
                       <Phone className="w-5 h-5" />
                       Call Doctor
                     </button>
@@ -475,6 +485,15 @@ export default function Doctors() {
           )}
         </div>
       </section>
+
+      {/* Booking Modal */}
+      <BookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+        doctorName={selectedDoctorData?.name || ""}
+        doctorSpecialty={selectedDoctorData?.specialty || ""}
+        doctorFee={selectedDoctorData?.fee || 0}
+      />
     </Layout>
   );
 }
