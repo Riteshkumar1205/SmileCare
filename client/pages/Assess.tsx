@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import TeethHeatmap from "@/components/TeethHeatmap";
 import { useLanguage } from "@/context/LanguageContext";
 import { useVoice } from "@/lib/useVoice";
 import {
@@ -520,11 +521,20 @@ export default function Assess() {
                 </div>
               )}
 
+              {/* Heatmap Visualization */}
+              {aiPrediction && (
+                <TeethHeatmap
+                  disease={aiPrediction.disease}
+                  confidence={aiPrediction.confidence}
+                  teethImage={uploadedImage || undefined}
+                />
+              )}
+
               {/* AI Prediction Results */}
               {aiPrediction && (
                 <div className="bg-white rounded-2xl border-2 border-gray-100 p-8 md:p-10">
                   <h3 className="text-xl font-bold text-gray-900 mb-6">
-                    AI Prediction Results
+                    Detailed Analysis
                   </h3>
 
                   <div className="space-y-4">
