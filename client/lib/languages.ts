@@ -1,19 +1,38 @@
-export type Language = "en" | "hi" | "ta" | "te" | "kn" | "mr" | "bn" | "gu";
+// client/lib/languages.ts
 
-export const LANGUAGES = {
+export type Language =
+  | "en"
+  | "hi"
+  | "te"
+  | "mr"
+  | "gu"
+  | "bn"
+  | "pa"
+  | "mai"
+  | "ur"
+  | "or";
+
+export const LANGUAGES: Record<
+  Language,
+  { name: string; nativeName: string; flag: string }
+> = {
   en: { name: "English", nativeName: "English", flag: "🇮🇳" },
-  hi: { name: "Hindi", nativeName: "हिंदी", flag: "🇮🇳" },
-  ta: { name: "Tamil", nativeName: "தமிழ்", flag: "🇮🇳" },
+  hi: { name: "Hindi", nativeName: "हिन्दी", flag: "🇮🇳" },
   te: { name: "Telugu", nativeName: "తెలుగు", flag: "🇮🇳" },
-  kn: { name: "Kannada", nativeName: "ಕನ್ನಡ", flag: "🇮🇳" },
   mr: { name: "Marathi", nativeName: "मराठी", flag: "🇮🇳" },
-  bn: { name: "Bengali", nativeName: "বাংলা", flag: "🇮🇳" },
   gu: { name: "Gujarati", nativeName: "ગુજરાતી", flag: "🇮🇳" },
-} as const;
+  bn: { name: "Bengali", nativeName: "বাংলা", flag: "🇮🇳" },
+  pa: { name: "Punjabi", nativeName: "ਪੰਜਾਬੀ", flag: "🇮🇳" },
+  mai: { name: "Maithili", nativeName: "मैथिली", flag: "🇮🇳" },
+  ur: { name: "Urdu", nativeName: "اُردُو", flag: "🇮🇳" },
+  or: { name: "Odia", nativeName: "ଓଡ଼ିଆ", flag: "🇮🇳" },
+};
 
-export const translations: Record<Language, Record<string, string>> = {
+type FlatTranslations = Record<string, string>;
+
+export const translations: Record<Language, FlatTranslations> = {
   en: {
-    // Navigation
+    // navigation
     home: "Home",
     assessTeeth: "Assess Teeth",
     findDoctor: "Find Doctor",
@@ -21,11 +40,10 @@ export const translations: Record<Language, Record<string, string>> = {
     myReports: "My Reports",
     consultNow: "Consult Now",
 
-    // Assessment
-    assessYourDentalHealth: "Assess Your Dental Health",
+    // assessment
     assessYourTeeth: "AI-Powered Teeth Assessment",
     uploadToGetAnalysis:
-      "Upload a photo of your teeth to get instant AI-powered analysis with accuracy metrics",
+      "Upload a photo of your teeth to get instant AI-powered analysis.",
     currentPainLevel: "Current Pain Level",
     noPain: "No pain",
     mild: "Mild",
@@ -38,10 +56,10 @@ export const translations: Record<Language, Record<string, string>> = {
     hardToManage: "Hard to manage",
     unbearable: "Unbearable",
     additionalSymptoms: "Additional Symptoms?",
-    selectSymptoms: "Select any you're experiencing",
+    selectSymptoms: "Select any symptoms you are experiencing",
     uploadTeethImages: "Upload Teeth Images for AI Analysis",
     uploadOrDrag: "Click to upload or drag",
-    uploadImageReady: "Image uploaded - Ready for AI analysis",
+    uploadImageReady: "Image uploaded — ready for AI analysis",
     analyzeWithAI: "Analyze with AI",
     analyzingWithAI: "Analyzing with AI...",
     useVoiceNotes: "Or use voice notes",
@@ -49,8 +67,11 @@ export const translations: Record<Language, Record<string, string>> = {
     microphoneActive: "Microphone Active",
     describeSymptoms: "Describe your symptoms in your language",
     backToHome: "Back to Home",
+    next: "Next",
+    back: "Back",
+    reAssess: "Re-assess",
 
-    // Results
+    // results
     greatNews: "Great News!",
     attentionNeeded: "Attention Needed",
     immediateCareRequired: "Immediate Care Required",
@@ -60,95 +81,14 @@ export const translations: Record<Language, Record<string, string>> = {
       "Some issues detected. We recommend consulting a dentist soon.",
     healthScoreCritical:
       "Urgent attention required. Please consult a dentist immediately.",
-    reAssess: "Re-assess",
 
-    // Doctors
-    findCompare: "Find & Compare Dentists",
-    findBestDentist:
-      "Find the best dentist near you with ratings, pricing, and real patient reviews",
-    searchByName: "Search by Name",
-    doctorName: "Doctor name...",
-    specialty: "Specialty",
-    sortBy: "Sort by",
-    nearestFirst: "Nearest First",
-    highestRated: "Highest Rated",
-    lowestFee: "Lowest Fee",
-    useMyLocation: "Use My Location",
-    consultNowBtn: "Consult Now",
-    callDoctor: "Call Doctor",
-    verified: "Verified",
-    yearsExperience: "Years Experience",
-
-    // Ambulance
     emergencyAmbulance: "Emergency Ambulance Service",
-    fastReliable:
-      "Fast, reliable ambulance services for dental emergencies. Real-time tracking and transparent pricing.",
-    emergencyLevel: "Emergency Level",
-    plannedVisit: "Planned Visit",
-    needHelpSoon: "Need help soon",
-    lifeThreatening: "Life-threatening",
-    availableAmbulances: "Available Ambulances Nearby",
-    bookAmbulance: "Book Ambulance Now",
-    confirmBooking: "Confirm Your Booking",
-    bookingDetails: "Booking Details",
-    serviceDetails: "Service Details",
-    ambulanceService: "Ambulance Service",
-    type: "Type",
-    estimatedTime: "Estimated Time",
-    totalPrice: "Total Price",
-    whatYouGet: "What You Get",
-    realTimeTracking: "Real-time Tracking",
-    trainedStaff: "Trained Staff",
-    safeTransport: "Safe Transport",
-    driverRating: "Driver Rating",
-    bookingID: "Booking ID",
-    amountPaid: "Amount Paid",
-    trackLive: "Track Live",
+    consultNowBtn: "Consult Now",
 
-    // Reports
-    yourHealthReports: "Your Health Reports",
-    trackDentalJourney:
-      "Track your dental health journey with detailed reports and recommendations",
-    totalAssessments: "Total Assessments",
-    averageHealthScore: "Average Health Score",
-    pendingConsultation: "Pending Consultation",
-    healthScoreTrend: "Health Score Trend",
-    assessmentHistory: "Assessment History",
-    exportYourReports: "Export Your Reports",
-    pdfFormat: "PDF Format",
-    shareWithDoctor: "Share with Doctor",
-    print: "Print",
-    downloadAllReports: "Download all reports as PDF",
-    sendToDoctor: "Send to your healthcare provider",
-    printYourHistory: "Print your complete health history",
-
-    // Common
-    yes: "Yes",
-    no: "No",
-    next: "Next",
-    back: "Back",
-    cancel: "Cancel",
-    confirm: "Confirm",
-    submit: "Submit",
-    save: "Save",
-    delete: "Delete",
-    edit: "Edit",
-    close: "Close",
-    loading: "Loading...",
-    error: "Error",
-    success: "Success",
-    warning: "Warning",
-    info: "Info",
-    selectLanguage: "Select Language",
-
-    // Errors
-    failedFetchModel: "Failed to fetch model info. Using demo mode.",
-    predictionFailed: "Prediction failed. Please try again.",
-    noImageProvided: "Please upload an image first.",
-    enableMicrophone: "Please enable microphone access.",
     voiceNotSupported: "Voice input not supported on your device.",
   },
 
+  // Other languages – minimal, anything missing falls back to English
   hi: {
     home: "होम",
     assessTeeth: "दांतों का मूल्यांकन करें",
@@ -156,167 +96,38 @@ export const translations: Record<Language, Record<string, string>> = {
     ambulance: "एम्बुलेंस",
     myReports: "मेरी रिपोर्टें",
     consultNow: "अभी परामर्श करें",
-
-    assessYourDentalHealth: "अपने दंत स्वास्थ्य का मूल्यांकन करें",
     assessYourTeeth: "एआई-संचालित दांतों का मूल्यांकन",
     uploadToGetAnalysis:
-      "तत्काल एआई-संचालित विश्लेषण के लिए अपने दांतों की फोटो अपलोड करें",
+      "तत्काल एआई विश्लेषण के लिए अपने दांतों की फोटो अपलोड करें।",
     currentPainLevel: "वर्तमान दर्द स्तर",
-    noPain: "कोई दर्द नहीं",
-    mild: "हल्का",
-    moderate: "मध्यम",
-    severe: "गंभीर",
-    extreme: "अत्यधिक",
-    perfectlyFine: "बिल्कुल ठीक है",
-    slightDiscomfort: "हल्की असुविधा",
-    noticeablePain: "ध्यान देने योग्य दर्द",
-    hardToManage: "प्रबंधित करना मुश्किल",
-    unbearable: "असहनीय",
     additionalSymptoms: "अतिरिक्त लक्षण?",
-    selectSymptoms: "जो आप अनुभव कर रहे हैं उन्हें चुनें",
-    uploadTeethImages: "एआई विश्लेषण के लिए दांतों की छवियां अपलोड करें",
+    selectSymptoms: "जो लक्षण हैं उन्हें चुनें",
+    uploadTeethImages: "एआई विश्लेषण के लिए दांतों की छवियाँ अपलोड करें",
     uploadOrDrag: "अपलोड करने के लिए क्लिक करें या खींचें",
-    uploadImageReady: "छवि अपलोड की गई - एआई विश्लेषण के लिए तैयार",
-    analyzeWithAI: "एआई के साथ विश्लेषण करें",
-    analyzingWithAI: "एआई के साथ विश्लेषण जारी है...",
-    useVoiceNotes: "या वॉयस नोट्स का उपयोग करें",
-    useMicrophone: "माइक्रोफोन का उपयोग करें",
-    microphoneActive: "माइक्रोफोन सक्रिय",
-    describeSymptoms: "अपनी भाषा में अपने लक्षणों का वर्णन करें",
-    backToHome: "होम पर वापस जाएं",
-
+    analyzeWithAI: "एआई से विश्लेषण करें",
+    analyzingWithAI: "एआई से विश्लेषण हो रहा है...",
+    useVoiceNotes: "या वॉइस नोट्स का उपयोग करें",
+    useMicrophone: "माइक्रोफ़ोन का उपयोग करें",
+    microphoneActive: "माइक्रोफ़ोन सक्रिय",
+    describeSymptoms: "अपनी भाषा में लक्षण बताएं",
+    next: "आगे",
+    back: "वापस",
+    reAssess: "फिर से परीक्षण करें",
     greatNews: "बहुत अच्छी खबर!",
-    attentionNeeded: "ध्यान आवश्यक है",
-    immediateCareRequired: "तत्काल देखभाल आवश्यक है",
-    healthScoreGood: "आपका दंत स्वास्थ्य अच्छा है। निवारक देखभाल जारी रखें।",
-    healthScoreCaution:
-      "कुछ स��स्याएं पाई गईं। हम शीघ्र ही दंत चिकित्सक से परामर्श लेने की अनुशंसा करते हैं।",
-    healthScoreCritical:
-      "तत्काल ध्यान आवश्यक है। कृपया तुरंत दंत चिकित्सक से परामर्श लें।",
-    reAssess: "पुनः मूल्यांकन करें",
-
-    findCompare: "दंत चिकित्सकों को खोजें और तुलना करें",
-    findBestDentist:
-      "रेटिंग, मूल्य और वास्तविक रोगी समीक्षाओं के साथ आपके पास सर्वश्रेष्ठ दंत चिकित्सक खोजें",
-    searchByName: "नाम से खोजें",
-    doctorName: "डॉक्टर का नाम...",
-    specialty: "विशेषता",
-    sortBy: "इस तरह क्रमबद्ध करें",
-    nearestFirst: "निकटतम पहले",
-    highestRated: "सर्वोच्च रेटिंग",
-    lowestFee: "सबसे कम शुल्क",
-    useMyLocation: "मेरा स्थान उपयोग करें",
-    consultNowBtn: "अभी परामर्श करें",
-    callDoctor: "डॉक्टर को कॉल करें",
-
-    emergencyAmbulance: "आपातकालीन एम्बुलेंस सेवा",
-    fastReliable:
-      "दंत आपातकाल के लिए तेज और विश्वसनीय एम्बुलेंस सेवा। वास्तविक समय ट्रैकिंग और पारदर्शी मूल्य निर्धारण।",
-    emergencyLevel: "आपातकाल स्तर",
-    plannedVisit: "नियोजित यात्रा",
-    needHelpSoon: "जल्दी मदद चाहिए",
-    bookAmbulance: "अभी एम्बुलेंस बुक करें",
-
-    yourHealthReports: "आपकी स्वास्थ्य रिपोर्टें",
-    trackDentalJourney:
-      "विस्तृत रिपोर्ट और सिफारिशों के साथ अपनी दंत स्वास्थ्य यात्रा को ट्रैक करें",
-
-    yes: "हां",
-    no: "नहीं",
-    next: "अगला",
-    back: "पिछला",
-    cancel: "रद्द करें",
-    confirm: "पुष्टि करें",
-    selectLanguage: "भाषा चुनें",
-    failedFetchModel:
-      "मॉडल की जानकारी प्राप्त करने में विफल। डेमो मोड का उपयोग कर रहे हैं।",
-    voiceNotSupported: "आपके डिवाइस पर वॉयस इनपुट समर्थित नहीं है।",
+    attentionNeeded: "ध्यान आवश्यक",
+    immediateCareRequired: "तत्काल देखभाल आवश्यक",
   },
 
-  ta: {
-    home: "முகப்பு",
-    assessTeeth: "பற்களை மதிப்பிடுங்கள்",
-    findDoctor: "மருத்துவரைக் கண்டுபிடிக்கவும்",
-    ambulance: "ஆம்புலன்ஸ்",
-    myReports: "எனது அறிக்கைகள்",
-    consultNow: "இப்போது ஆலோசனை செய்யுங்கள்",
-
-    assessYourDentalHealth: "உங்கள் பல் ஆரோக்கியத்தை மதிப்பிடுங்கள்",
-    currentPainLevel: "தற்போதைய வலির் நிலை",
-    noPain: "வலி இல்லை",
-    additionalSymptoms: "கூடுதல் அறிகுறிகள்?",
-    analyzeWithAI: "AI ஆல் பகுப்பாய்வு செய்யவும்",
-    useMicrophone: "மைக்ரோஃபோனைப் பயன��படுத்தவும்",
-    yes: "ஆம்",
-    no: "இல்லை",
-    selectLanguage: "மொழியைத் தேர்ந்தெடுக்கவும்",
+  te: { home: "హోమ్", assessTeeth: "దంతాలను అంచనా వేయండి" },
+  mr: { home: "होम", assessTeeth: "दातांचे मूल्यांकन करा" },
+  gu: { home: "હોમ", assessTeeth: "દાંતોનું મૂલ્યાંકન કરો" },
+  bn: { home: "হোম", assessTeeth: "দাঁত মূল্যায়ন করুন" },
+  pa: { home: "ਹੋਮ", assessTeeth: "ਦੰਦਾਂ ਦੀ ਜਾਂਚ ਕਰੋ" },
+  mai: { home: "होम", assessTeeth: "दाँत के जाँच करु" },
+  ur: {
+    home: "ہوم",
+    assessTeeth: "دانتوں کا معائنہ کریں",
+    consultNow: "فوراً مشورہ کریں",
   },
-
-  te: {
-    home: "హోమ్",
-    assessTeeth: "దంతాలను అంచనా వేయండి",
-    findDoctor: "డాక్టర్‌ను కనుగొనండి",
-    ambulance: "ఆంబులెన్స్",
-    myReports: "నా నివేదనలు",
-    consultNow: "ఇప్పుడే సంప్రదించండి",
-
-    assessYourDentalHealth: "మీ దంత ఆరోగ్యాన్ని అంచనా వేయండి",
-    currentPainLevel: "ప్రస్తుత నొప్పి స్థాయి",
-    noPain: "నొప్పి లేదు",
-    yes: "అవును",
-    no: "కాదు",
-    selectLanguage: "భాషను ఎంచుకోండి",
-  },
-
-  kn: {
-    home: "ಮುಖಪುಟ",
-    assessTeeth: "ಹಲ್ಲುಗಳನ್ನು ನಿರ್ಣಯಿಸಿ",
-    findDoctor: "ವೈದ್ಯರನ್ನು ಹುಡುಕಿ",
-    ambulance: "ಆಂಬುಲೆನ್ಸ್",
-    myReports: "ನನ್ನ ವರದಿಗಳು",
-    consultNow: "ಈಗಲೇ ಸಲಹೆ ಪಡೆಯಿರಿ",
-
-    yes: "ಹೌದು",
-    no: "ಇಲ್ಲ",
-    selectLanguage: "ಭಾಷೆಯನ್ನು ಆರಿಸಿ",
-  },
-
-  mr: {
-    home: "होम",
-    assessTeeth: "दांतांचे मूल्यांकन करा",
-    findDoctor: "डॉक्टर शोधा",
-    ambulance: "अॅम्बुलन्स",
-    myReports: "माझ्या अहवाल",
-    consultNow: "आत्ता सल्ला घ्या",
-
-    yes: "होय",
-    no: "नाही",
-    selectLanguage: "भाषा निवडा",
-  },
-
-  bn: {
-    home: "হোম",
-    assessTeeth: "দাঁত মূল্যায়ন করুন",
-    findDoctor: "ডাক্তার খুঁজুন",
-    ambulance: "অ্যাম্বুলেন্স",
-    myReports: "আমার রিপোর্টগুলি",
-    consultNow: "এখনই পরামর্শ করুন",
-
-    yes: "হ্যাঁ",
-    no: "না",
-    selectLanguage: "ভাষা নির্বাচন করুন",
-  },
-
-  gu: {
-    home: "હોમ",
-    assessTeeth: "દાંતોનું મૂલ્યાંકન કરો",
-    findDoctor: "ડૉક્ટર શોધો",
-    ambulance: "એમ્બુલેન્સ",
-    myReports: "મારી અહેવાલો",
-    consultNow: "હવ��� સલાહ લો",
-
-    yes: "હા",
-    no: "ના",
-    selectLanguage: "ભાષા પસંદ કરો",
-  },
+  or: { home: "ହୋମ", assessTeeth: "ଦାନ୍ତ ଯାଞ୍ଚ କରନ୍ତୁ" },
 };

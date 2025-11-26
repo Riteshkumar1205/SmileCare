@@ -1,4 +1,5 @@
-import { useState } from "react";
+// client/pages/Consult.tsx
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import {
@@ -6,7 +7,6 @@ import {
   Video,
   Phone,
   Clock,
-  Globe,
   Star,
   Send,
   ArrowRight,
@@ -30,16 +30,16 @@ const consultants: Consultant[] = [
   {
     id: 1,
     name: "Dr. Emily Johnson",
-    language: "English",
+    language: "English, Hindi",
     availability: "Available now",
     rating: 4.9,
     responseTime: 2,
-    image: "👨‍⚕️",
+    image: "👩‍⚕️",
   },
   {
     id: 2,
-    name: "Dr. Hans Mueller",
-    language: "English, German",
+    name: "Dr. Rajesh Kumar",
+    language: "Hindi, Marathi",
     availability: "Available in 5 min",
     rating: 4.8,
     responseTime: 3,
@@ -52,7 +52,7 @@ const consultants: Consultant[] = [
     availability: "Available now",
     rating: 4.9,
     responseTime: 1,
-    image: "👩‍��️",
+    image: "👩‍⚕️",
   },
 ];
 
@@ -70,26 +70,30 @@ export default function Consult() {
   const [isMicOn, setIsMicOn] = useState(true);
   const [isVideoOn, setIsVideoOn] = useState(true);
 
-  // Simulate call duration timer
-  React.useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (consultationStarted) {
+  useEffect(() => {
+    let interval: NodeJS.Timeout | undefined;
+    if (consultationStarted && (chatMode === "call" || chatMode === "video")) {
       interval = setInterval(() => {
         setCallDuration((prev) => prev + 1);
       }, 1000);
     }
-    return () => clearInterval(interval);
-  }, [consultationStarted]);
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [consultationStarted, chatMode]);
 
   const formatCallDuration = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+    return `${mins.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   const handleSelectConsultant = (id: number) => {
     setSelectedConsultant(id);
     setConsultationStarted(true);
+    setCallDuration(0);
     setMessages([
       {
         id: 1,
@@ -99,79 +103,37 @@ export default function Consult() {
     ]);
   };
 
-  const generateAIResponse = (userMessage: string) => {
-    const lowerMessage = userMessage.toLowerCase();
-
-    // AI responses based on keywords
-    if (
-      lowerMessage.includes("pain") ||
-      lowerMessage.includes("hurt") ||
-      lowerMessage.includes("ache")
-    ) {
-      return "I understand you're experiencing pain. Can you describe the location and intensity? This will help me provide better guidance. Meanwhile, try rinsing with warm salt water.";
+  const generateAIResponse = (message: string) => {
+    const lower = message.toLowerCase();
+    if (lower.includes("pain") || lower.includes("ache")) {
+      return "I understand you're experiencing pain. Please describe the location and intensity. Meanwhile, try warm salt-water rinses and avoid very hot or cold foods.";
     }
-    if (
-      lowerMessage.includes("sensitivity") ||
-      lowerMessage.includes("sensitive")
-    ) {
-      return "Tooth sensitivity is common. Avoid acidic foods and beverages. Use a soft-bristled toothbrush and sensitivity toothpaste. If it persists, we should schedule an in-person examination.";
+    if (lower.includes("sensitivity")) {
+      return "Tooth sensitivity is common. Use a soft toothbrush and sensitivity toothpaste, and avoid acidic foods. If it continues for more than a week, a check-up is recommended.";
     }
-    if (
-      lowerMessage.includes("bleed") ||
-      lowerMessage.includes("bleeding") ||
-      lowerMessage.includes("gum")
-    ) {
-      return "Bleeding gums may indicate gum disease or gingivitis. Improve your oral hygiene - brush twice daily and floss. If bleeding continues for more than a week, an in-person visit is recommended.";
+    if (lower.includes("bleeding") || lower.includes("gum")) {
+      return "Bleeding gums may indicate gum disease. Brush gently along the gumline and floss daily. If bleeding continues for more than 7 days, visit a dentist or PHC.";
     }
-    if (
-      lowerMessage.includes("cavity") ||
-      lowerMessage.includes("decay") ||
-      lowerMessage.includes("black spot")
-    ) {
-      return "Cavities require professional treatment. I recommend scheduling an appointment for a proper examination and filling. Avoid very hot/cold foods in the meantime.";
+    if (lower.includes("cavity") || lower.includes("decay")) {
+      return "Cavities require professional treatment. Avoid sweets and very cold items, and book an appointment for filling or further care.";
     }
-    if (
-      lowerMessage.includes("bad breath") ||
-      lowerMessage.includes("halitosis")
-    ) {
-      return "Bad breath can stem from poor oral hygiene, diet, or underlying conditions. Brush your tongue, floss daily, and use mouthwash. Increase water intake. If the problem persists, we should investigate further.";
-    }
-    if (lowerMessage.includes("whitening") || lowerMessage.includes("white")) {
-      return "Professional whitening treatments are available. For best results, we recommend in-office whitening which provides faster and longer-lasting results than over-the-counter options.";
-    }
-    if (lowerMessage.includes("cost") || lowerMessage.includes("price")) {
-      return "The cost depends on the treatment required. Let's first understand your condition through this consultation, then I can provide you with an accurate estimate.";
-    }
-
-    // Default response
-    return "Thank you for sharing that information. Based on what you've described, I recommend we schedule an in-person visit for a thorough examination. In the meantime, maintain good oral hygiene and avoid trigger foods.";
+    return "Thank you for sharing. Based on your description, I would still recommend a dental check-up for a detailed examination.";
   };
 
   const handleSendMessage = () => {
     if (!inputMessage.trim()) return;
-
-    const userMsg = inputMessage.trim();
-    setMessages([
-      ...messages,
-      {
-        id: messages.length + 1,
-        text: userMsg,
-        sender: "user",
-      },
+    const msg = inputMessage.trim();
+    setMessages((prev) => [
+      ...prev,
+      { id: prev.length + 1, text: msg, sender: "user" },
     ]);
-
     setInputMessage("");
 
-    // Simulate AI doctor response with slight delay
     setTimeout(() => {
-      const aiResponse = generateAIResponse(userMsg);
+      const reply = generateAIResponse(msg);
       setMessages((prev) => [
         ...prev,
-        {
-          id: prev.length + 1,
-          text: aiResponse,
-          sender: "doctor",
-        },
+        { id: prev.length + 1, text: reply, sender: "doctor" },
       ]);
     }, 800);
   };
@@ -184,9 +146,8 @@ export default function Consult() {
         <section className="py-12 md:py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Chat Area */}
+              {/* Chat area */}
               <div className="lg:col-span-2 bg-white rounded-2xl border-2 border-gray-100 flex flex-col h-96">
-                {/* Header */}
                 <div className="border-b border-gray-200 p-6 flex items-center justify-between bg-gradient-to-r from-primary/5 to-accent/5">
                   <div className="flex items-center gap-4 flex-1">
                     <div className="text-4xl">{consultant.image}</div>
@@ -194,21 +155,13 @@ export default function Consult() {
                       <h2 className="font-bold text-gray-900">
                         {consultant.name}
                       </h2>
-                      <div className="text-sm text-green-600 flex items-center gap-1">
-                        <div className="w-2 h-2 bg-green-600 rounded-full animate-pulse" />
-                        <span>
-                          {chatMode === "video"
-                            ? "Video Call Active"
-                            : chatMode === "call"
-                              ? "Audio Call Active"
-                              : "Connected"}
-                        </span>
-                      </div>
+                      <p className="text-xs text-gray-600">
+                        {consultant.language}
+                      </p>
                     </div>
                   </div>
 
-                  {/* Call Duration Timer */}
-                  {(chatMode === "video" || chatMode === "call") && (
+                  {(chatMode === "call" || chatMode === "video") && (
                     <div className="text-lg font-bold text-primary px-4 py-2 bg-white rounded-lg">
                       {formatCallDuration(callDuration)}
                     </div>
@@ -222,7 +175,6 @@ export default function Consult() {
                           ? "bg-primary text-white"
                           : "text-gray-600 hover:bg-gray-100"
                       }`}
-                      title="Chat"
                     >
                       <MessageSquare className="w-5 h-5" />
                     </button>
@@ -233,7 +185,6 @@ export default function Consult() {
                           ? "bg-primary text-white"
                           : "text-gray-600 hover:bg-gray-100"
                       }`}
-                      title="Audio Call"
                     >
                       <Phone className="w-5 h-5" />
                     </button>
@@ -244,142 +195,47 @@ export default function Consult() {
                           ? "bg-primary text-white"
                           : "text-gray-600 hover:bg-gray-100"
                       }`}
-                      title="Video Call"
                     >
                       <Video className="w-5 h-5" />
                     </button>
                   </div>
                 </div>
 
-                {/* Video/Audio Call View */}
-                {(chatMode === "video" || chatMode === "call") && (
-                  <div className="bg-black/5 p-6 flex items-center justify-center min-h-64 relative">
-                    {chatMode === "video" ? (
-                      <div className="relative w-full aspect-video bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="text-8xl mb-4">
-                            {consultant.image}
-                          </div>
-                          <p className="text-white font-semibold">
-                            Video Call Connected
-                          </p>
-                          <p className="text-gray-300 text-sm mt-2">
-                            {consultant.name}
-                          </p>
-                        </div>
-
-                        {/* Video Controls */}
-                        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3">
-                          <button
-                            onClick={() => setIsMicOn(!isMicOn)}
-                            className={`p-3 rounded-full transition ${
-                              isMicOn
-                                ? "bg-gray-600 text-white hover:bg-gray-700"
-                                : "bg-red-600 text-white hover:bg-red-700"
-                            }`}
-                            title={isMicOn ? "Mute" : "Unmute"}
-                          >
-                            {isMicOn ? (
-                              <Mic className="w-6 h-6" />
-                            ) : (
-                              <MicOff className="w-6 h-6" />
-                            )}
-                          </button>
-                          <button
-                            onClick={() => setIsVideoOn(!isVideoOn)}
-                            className={`p-3 rounded-full transition ${
-                              isVideoOn
-                                ? "bg-gray-600 text-white hover:bg-gray-700"
-                                : "bg-red-600 text-white hover:bg-red-700"
-                            }`}
-                            title={isVideoOn ? "Stop Video" : "Start Video"}
-                          >
-                            {isVideoOn ? (
-                              <Video className="w-6 h-6" />
-                            ) : (
-                              <VideoOff className="w-6 h-6" />
-                            )}
-                          </button>
-                          <button
-                            onClick={() => setConsultationStarted(false)}
-                            className="p-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition"
-                            title="End Call"
-                          >
-                            <PhoneOff className="w-6 h-6" />
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="text-center py-12">
-                        <div className="text-8xl mb-4">{consultant.image}</div>
-                        <p className="text-gray-900 font-semibold text-xl">
-                          {consultant.name}
-                        </p>
-                        <p className="text-gray-600 mt-2">
-                          Audio Call Connected
-                        </p>
-
-                        {/* Audio Controls */}
-                        <div className="flex gap-3 justify-center mt-8">
-                          <button
-                            onClick={() => setIsMicOn(!isMicOn)}
-                            className={`p-4 rounded-full transition ${
-                              isMicOn
-                                ? "bg-primary text-white hover:bg-primary/90"
-                                : "bg-red-600 text-white hover:bg-red-700"
-                            }`}
-                            title={isMicOn ? "Mute" : "Unmute"}
-                          >
-                            {isMicOn ? (
-                              <Mic className="w-6 h-6" />
-                            ) : (
-                              <MicOff className="w-6 h-6" />
-                            )}
-                          </button>
-                          <button
-                            onClick={() => setConsultationStarted(false)}
-                            className="p-4 bg-red-600 text-white rounded-full hover:bg-red-700 transition"
-                            title="End Call"
-                          >
-                            <PhoneOff className="w-6 h-6" />
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-
                 {/* Messages */}
                 <div className="flex-1 overflow-y-auto p-6 space-y-4">
-                  {messages.map((msg) => (
+                  {messages.map((m) => (
                     <div
-                      key={msg.id}
+                      key={m.id}
                       className={`flex ${
-                        msg.sender === "user" ? "justify-end" : "justify-start"
+                        m.sender === "user"
+                          ? "justify-end"
+                          : "justify-start"
                       }`}
                     >
                       <div
                         className={`max-w-xs px-4 py-2 rounded-lg ${
-                          msg.sender === "user"
+                          m.sender === "user"
                             ? "bg-primary text-white"
                             : "bg-gray-100 text-gray-900"
                         }`}
                       >
-                        {msg.text}
+                        {m.text}
                       </div>
                     </div>
                   ))}
                 </div>
 
                 {/* Input */}
-                <div className="border-t border-gray-200 p-6 flex gap-2">
+                <div className="border-t border-gray-200 p-4 flex gap-2">
                   <input
                     type="text"
-                    placeholder="Type your question..."
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
-                    onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-                    className="flex-1 px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition"
+                    onKeyDown={(e) =>
+                      e.key === "Enter" && handleSendMessage()
+                    }
+                    placeholder="Type your question..."
+                    className="flex-1 px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none"
                   />
                   <button
                     onClick={handleSendMessage}
@@ -391,14 +247,13 @@ export default function Consult() {
               </div>
 
               {/* Sidebar */}
-              <div className="lg:col-span-1 space-y-6">
-                {/* Session Info */}
+              <div className="space-y-6">
                 <div className="bg-white rounded-2xl border-2 border-gray-100 p-6">
                   <h3 className="font-bold text-gray-900 mb-4">Session Info</h3>
                   <div className="space-y-3 text-sm">
                     <div className="flex items-center gap-2 text-gray-700">
                       <Clock className="w-4 h-4 text-primary" />
-                      <span>Duration: 12:34</span>
+                      <span>Approx. duration: 10–15 min</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-700">
                       <Star className="w-4 h-4 text-yellow-500" />
@@ -407,21 +262,25 @@ export default function Consult() {
                   </div>
                 </div>
 
-                {/* Recommendations */}
                 <div className="bg-blue-50 rounded-2xl border-2 border-blue-200 p-6">
                   <h3 className="font-bold text-gray-900 mb-3">
-                    Dentist's Recommendations
+                    Dentist&apos;s Recommendations
                   </h3>
                   <ul className="text-sm text-gray-700 space-y-2">
-                    <li>✓ Regular brushing twice daily</li>
-                    <li>✓ Use fluoride mouthwash</li>
-                    <li>✓ Avoid sugary foods</li>
-                    <li>✓ Schedule check-up in 3 months</li>
+                    <li>✓ Brush twice a day with fluoride toothpaste</li>
+                    <li>✓ Avoid very sugary snacks and drinks</li>
+                    <li>✓ Rinse after meals and before sleep</li>
+                    <li>✓ Schedule an in-person check-up if pain persists</li>
                   </ul>
                 </div>
 
-                {/* End Session */}
-                <button className="w-full px-4 py-3 border-2 border-red-500 text-red-600 font-semibold rounded-lg hover:bg-red-50 transition">
+                <button
+                  onClick={() => {
+                    setConsultationStarted(false);
+                    setSelectedConsultant(null);
+                  }}
+                  className="w-full px-4 py-3 border-2 border-red-500 text-red-600 font-semibold rounded-lg hover:bg-red-50 transition"
+                >
                   End Session
                 </button>
               </div>
@@ -432,22 +291,20 @@ export default function Consult() {
     );
   }
 
+  // Consultant list view
   return (
     <Layout>
-      {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-12 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Consult with Dentists Worldwide
+            Consult with Dentists
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl">
-            Connect with licensed dentists globally via text, video, or call.
-            Available 24/7 in your language.
+            Connect with licensed dentists via secure chat, audio, or video.
           </p>
         </div>
       </section>
 
-      {/* Consultants */}
       <section className="py-12 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -458,57 +315,21 @@ export default function Consult() {
               >
                 <div className="text-6xl mb-4">{c.image}</div>
                 <h3 className="font-bold text-gray-900 mb-2">{c.name}</h3>
-                <p className="text-sm text-gray-600 mb-4">{c.language}</p>
-
-                <div className="space-y-2 mb-6 text-sm">
-                  <div className="flex items-center justify-center gap-2">
-                    <Clock className="w-4 h-4 text-primary" />
-                    <span className="text-gray-700">{c.availability}</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-2">
-                    <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                    <span className="text-gray-700">{c.rating}★</span>
-                  </div>
+                <p className="text-sm text-gray-600 mb-2">{c.language}</p>
+                <div className="flex items-center justify-center gap-2 text-sm mb-4">
+                  <Clock className="w-4 h-4 text-primary" />
+                  <span>{c.availability}</span>
                 </div>
-
+                <div className="flex items-center justify-center gap-2 text-sm mb-6">
+                  <Star className="w-4 h-4 text-yellow-500" />
+                  <span>{c.rating}★</span>
+                </div>
                 <button
                   onClick={() => handleSelectConsultant(c.id)}
                   className="w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition"
                 >
                   Start Consultation
                 </button>
-              </div>
-            ))}
-          </div>
-
-          {/* Features */}
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: "🌍",
-                title: "Global Network",
-                desc: "Dentists from all around the world",
-              },
-              {
-                icon: "⏰",
-                title: "24/7 Available",
-                desc: "Get help whenever you need it",
-              },
-              {
-                icon: "💬",
-                title: "Multiple Languages",
-                desc: "Speak in your preferred language",
-              },
-            ].map((feature, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl p-6 text-center border-2 border-gray-100"
-              >
-                <div className="text-4xl mb-3">{feature.icon}</div>
-                <h3 className="font-bold text-gray-900 mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-gray-600">{feature.desc}</p>
               </div>
             ))}
           </div>
